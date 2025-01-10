@@ -29,17 +29,18 @@ const Navbar = ({ logoSrc }) => {
             <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/services">Services</Link>
             </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/vision">Vision</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/contact">Contact Us</Link>
-            </li>
+            
             <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/quote">Get a Quote</Link>
             </li>
             <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/setup">Get Yourself Setup</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/contact">Contact Us</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/about">About</Link>
             </li>
           </ul>
         </div>

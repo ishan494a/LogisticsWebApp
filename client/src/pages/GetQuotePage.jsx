@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+const PLACES_API_KEY = import.meta.env.VITE_PLACES_API_KEY;
+
 
 const GetQuotePage = () => {
   const [shipmentType, setShipmentType] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [pickupAddress, setPickupAddress] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [numberOfSkids, setNumberOfSkids] = useState('');
@@ -15,10 +19,11 @@ const GetQuotePage = () => {
     width: '',
     height: '',
   });
+  const [dimUnit, setDimUnit] = useState('inches');
   const [differentDimensions, setDifferentDimensions] = useState(false);
   const [skidDimensions, setSkidDimensions] = useState([]);
   const [weight, setWeight] = useState('');
-  const [weightUnit, setWeightUnit] = useState('kg');
+  const [weightUnit, setWeightUnit] = useState('lbs');
   const [commodity, setCommodity] = useState('');
   const [hazardous, setHazardous] = useState(false);
   const [equipmentType, setEquipmentType] = useState('');
@@ -39,7 +44,6 @@ const GetQuotePage = () => {
     setSkidDimensions(initialSkidDimensions);
     setShowModal(true);
   };
-
   const handleSkidChange = (index, dimension, value) => {
     const updatedSkids = [...skidDimensions];
     if (!updatedSkids[index]) {
@@ -59,7 +63,6 @@ const GetQuotePage = () => {
     if (!deliveryAddress) newErrors.push('Delivery Address');
     if (!numberOfSkids) newErrors.push('Number of Skids');
     if (!weight) newErrors.push('Weight');
-    if (!commodity && !hazardous) newErrors.push('Commodity or Hazardous');
     if (!equipmentType) newErrors.push('Type of Equipment');
     if (equipmentType === 'refer' && !temperatureRequired) newErrors.push('Temperature Required');
     
@@ -89,10 +92,10 @@ const GetQuotePage = () => {
         - **Name**: ${name}
         - **Email**: ${email}
         - **Shipment Type**: ${shipmentType}
-        - **Pickup Address**: ${pickupAddress}
-        - **Delivery Address**: ${deliveryAddress}
+        - **Pickup Address**: ${pickupAddress.label}
+        - **Delivery Address**: ${deliveryAddress.label}
         - **Number of Skids**: ${numberOfSkids}
-        - **Dimensions**: ${dimensions}
+        - **Dimensions**: ${dimensions.length + `x` + dimensions.width + `x` + dimensions.height} ${dimUnit}
         - **Weight**: ${weight} ${weightUnit}
         - **Commodity**: ${commodity}
         - **Hazardous**: ${hazardous ? 'Yes' : 'No'}
@@ -100,16 +103,30 @@ const GetQuotePage = () => {
         - **Temperature Required**: ${temperatureRequired}
         - **Special Requirements**: ${specialRequirements}
 
-        - **Skid Dimensions**:
+        - **Different Skid Dimensions**:
           ${skidDimensions.map((dim, index) => `
             Skid ${index + 1}:
-              - Length: ${dim.length}
-              - Width: ${dim.width}
-              - Height: ${dim.height}`).join('\n')}
+              - Length: ${dim.length} ${dimUnit}
+              - Width: ${dim.width} ${dimUnit}
+              - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
 
       console.log(emailBody);
+      setName('');
+      setEmail('');
+      setShipmentType('');
+      setPickupAddress(null);
+      setDeliveryAddress(null);  
+      setNumberOfSkids('');
+      setDimensions({ length: '', width: '', height: '' });
+      setWeight('');
+      setCommodity('');
+      setHazardous(false);
+      setEquipmentType('');
+      setTemperatureRequired('');
+      setSpecialRequirements('');
+      setSkidDimensions([]);
     }
   };
 
@@ -149,6 +166,16 @@ const GetQuotePage = () => {
               onChange={(e) => setEmail(e.target.value)} 
             />
           </Form.Group>
+          <Form.Group as={Col} controlId="formEmail">
+            <Form.Label>Phone Number </Form.Label>
+            <Form.Control 
+              required 
+              type="phone" 
+              placeholder="Your Phone" 
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)} 
+            />
+          </Form.Group>
         </Row>
         
         <Row className="mb-3">
@@ -174,28 +201,33 @@ const GetQuotePage = () => {
           </Form.Group>
         </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formPickupAddress">
-            <Form.Label>Pickup Address <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Pickup Address"
-              value={pickupAddress}
-              onChange={(e) => setPickupAddress(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group as={Col} controlId="formDeliveryAddress">
-            <Form.Label>Delivery Address <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Delivery Address"
-              value={deliveryAddress}
-              onChange={(e) => setDeliveryAddress(e.target.value)}
-            />
-          </Form.Group>
-        </Row>
+<Row className="mb-3">
+        <Form.Group as={Col} controlId="formPickupAddress">
+          <Form.Label>Pickup Address <span className="text-danger">*</span></Form.Label>
+          <GooglePlacesAutocomplete
+            apiKey={PLACES_API_KEY}
+            selectProps={{
+              value: pickupAddress,
+              onChange: (value) => setPickupAddress(value),
+              placeholder: "Start Typing...",
+            }}
+          />
+        </Form.Group>
+      </Row>
+
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formDeliveryAddress">
+          <Form.Label>Delivery Address <span className="text-danger">*</span></Form.Label>
+          <GooglePlacesAutocomplete
+            apiKey={PLACES_API_KEY}
+            selectProps={{
+              value: deliveryAddress,
+              onChange: (value) => setDeliveryAddress(value),
+              placeholder: "Start Typing...",
+            }}
+          />
+        </Form.Group>
+      </Row>
 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formNumberOfSkids">
@@ -212,9 +244,28 @@ const GetQuotePage = () => {
 
         {shipmentType === 'LTL' && (
           <>
+          
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formDimensions">
                 <Form.Label>Dimensions (L x W x H) <span className="text-danger">*</span></Form.Label>
+                <div className="d-flex">
+                  <Form.Check
+                    type="radio"
+                    label="inches"
+                    name="dimUnits"
+                    value="inches"
+                    onChange={() => setDimUnit('inches')}
+                    style={{paddingRight: '2rem'}}
+                    defaultChecked
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="cms"
+                    name="dimUnits"
+                    value="cms"
+                    onChange={() => setDimUnit('cms')}
+                  />
+                </div>
                 <Form.Group as={Col} controlId="formDifferentDimensions">
                   <Form.Check
                     type="checkbox"
@@ -313,10 +364,10 @@ const GetQuotePage = () => {
             <div className="d-flex">
               <Form.Check
                 type="radio"
-                label="Kg"
+                label="Kgs"
                 name="weightUnit"
-                value="kg"
-                onChange={() => setWeightUnit('kg')}
+                value="kgs"
+                onChange={() => setWeightUnit('kgs')}
                 style={{paddingRight: '2rem'}}
               />
               <Form.Check
@@ -325,6 +376,7 @@ const GetQuotePage = () => {
                 name="weightUnit"
                 value="lbs"
                 onChange={() => setWeightUnit('lbs')}
+                defaultChecked
               />
             </div>
           </Form.Group>

@@ -12,6 +12,7 @@ import GetSetupPage from "./pages/GetSetupPage";
 import Footer from "./components/Footer"; 
 import logo from './assets/logos/original_processed.png';
 import './App.css';
+import About from "./pages/About";
 
 function App() {
   return (
@@ -20,10 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/vision" element={<VisionPage />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/quote" element={<GetQuotePage />} />
         <Route path="/setup" element={<GetSetupPage />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </Router>
