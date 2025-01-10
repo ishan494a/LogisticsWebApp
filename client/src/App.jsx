@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'; // Styles
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // JavaScript
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+import Services from "./pages/Services";
+import VisionPage from "./pages/VisionPage";
+import ContactUs from "./pages/ContactUs";
+import GetQuotePage from "./pages/GetQuotePage";
+import GetSetupPage from "./pages/GetSetupPage";
+import logo from './assets/logos/trans_bg.png';
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Navbar logoSrc= {logo} />
+      <Routes>
+        <Route path="/" element = {<Homepage/>}/>
+        <Route path="/services" element = {<Services/>}/>
+        <Route path="/vision" element = {<VisionPage/>}/>
+        <Route path="/contact" element = {<ContactUs/>}/>
+        <Route path="/quote" element = {<GetQuotePage/>}/>
+        <Route path="/setup" element = {<GetSetupPage/>}/>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
