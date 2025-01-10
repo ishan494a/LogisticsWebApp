@@ -4,6 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 const PLACES_API_KEY = import.meta.env.VITE_PLACES_API_KEY;
+const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
+const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+import emailjs from 'emailjs-com';
 
 
 const GetQuotePage = () => {
@@ -33,6 +37,7 @@ const GetQuotePage = () => {
   
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [messageStatus, setMessageStatus] = useState(null);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => {
@@ -86,24 +91,24 @@ const GetQuotePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const emailBody = `
+      const message = `
         You have received a new quote request. Below are the details:
 
-        - **Name**: ${name}
-        - **Email**: ${email}
-        - **Shipment Type**: ${shipmentType}
-        - **Pickup Address**: ${pickupAddress.label}
-        - **Delivery Address**: ${deliveryAddress.label}
-        - **Number of Skids**: ${numberOfSkids}
-        - **Dimensions**: ${dimensions.length + `x` + dimensions.width + `x` + dimensions.height} ${dimUnit}
-        - **Weight**: ${weight} ${weightUnit}
-        - **Commodity**: ${commodity}
-        - **Hazardous**: ${hazardous ? 'Yes' : 'No'}
-        - **Equipment Type**: ${equipmentType}
-        - **Temperature Required**: ${temperatureRequired}
-        - **Special Requirements**: ${specialRequirements}
+        - Name: ${name}
+        - Email: ${email}
+        - Shipment Type: ${shipmentType}
+        - Pickup Address: ${pickupAddress.label}
+        - Delivery Address: ${deliveryAddress.label}
+        - Number of Skids: ${numberOfSkids}
+        - Dimensions: ${dimensions.length}x${dimensions.width}x${dimensions.height} ${dimUnit}
+        - Weight: ${weight} ${weightUnit}
+        - Commodity: ${commodity}
+        - Hazardous: ${hazardous ? 'Yes' : 'No'}
+        - Equipment Type: ${equipmentType}
+        - Temperature Required: ${temperatureRequired}
+        - Special Requirements: ${specialRequirements}
 
-        - **Different Skid Dimensions**:
+        - Different Skid Dimensions:
           ${skidDimensions.map((dim, index) => `
             Skid ${index + 1}:
               - Length: ${dim.length} ${dimUnit}
@@ -111,10 +116,26 @@ const GetQuotePage = () => {
               - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
-
-      console.log(emailBody);
+      const params = {
+        subject : "New Quote Request",
+        message : message
+      }
+      emailjs.init(EMAIL_API_KEY);
+      emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        params
+      ).then(
+        (result) => {
+          setMessageStatus('success');
+        },
+        (error) => {
+          setMessageStatus('error');
+        }
+      );
       setName('');
       setEmail('');
+      setPhone('');
       setShipmentType('');
       setPickupAddress(null);
       setDeliveryAddress(null);  
@@ -166,10 +187,9 @@ const GetQuotePage = () => {
               onChange={(e) => setEmail(e.target.value)} 
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="formEmail">
-            <Form.Label>Phone Number </Form.Label>
+          <Form.Group as={Col} controlId="formPhone">
+            <Form.Label>Phone </Form.Label>
             <Form.Control 
-              required 
               type="phone" 
               placeholder="Your Phone" 
               value={phone}
@@ -465,6 +485,17 @@ const GetQuotePage = () => {
         <div className="text-center">
           <Button variant="primary" type="submit">Get Quote</Button>
         </div>
+
+        {messageStatus === 'success' && (
+          <Alert variant="success" className="mt-3">
+            Your quote request has been sent successfully!
+          </Alert>
+        )}
+        {messageStatus === 'error' && (
+          <Alert variant="danger" className="mt-3">
+            There was an error sending your quote request. Please try again.
+          </Alert>
+        )}
       </Form>
     </div>
   );
