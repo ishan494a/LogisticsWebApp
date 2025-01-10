@@ -1,0 +1,50 @@
+/* Navbar.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+.navbar {
+  border-bottom: 4px solid #c90000;
+  padding: 1rem 0;
+}
+
+.navbarBrand {
+  display: flex;
+  align-items: center;
+}
+
+.navbarLogo {
+  width: 40px;
+  height: 40px;
+  transform: scale(1.4);
+  transition: transform 0.3s ease;
+}
+
+.navbarLogo:hover {
+  transform: scale(1.5); /* Optional: zoom effect on hover */
+}
+
+.navbarLinks {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.navItem {
+  list-style-type: none;
+}
+
+.navLink {
+  color: #ddd;
+  font-weight: 500;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.navLink:hover {
+  color: #c90000;
+}
+
+.navbarBrand span {
+  font-family: 'Jersey 10', sans-serif;
+  font-size: 1.7rem;
+}
