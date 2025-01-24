@@ -12,6 +12,8 @@ import Footer from "./components/Footer";
 import logo from './assets/logos/original_processed.png';
 import './App.css';
 import About from "./pages/About";
+import 'font-awesome/css/font-awesome.min.css';
+
 
 function App() {
   return (

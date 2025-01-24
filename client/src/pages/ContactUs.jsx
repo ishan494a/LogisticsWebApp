@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import emailjs from 'emailjs-com';
+import styles from '../styles/ContactUs.module.css';
+
 const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
 const TEMPLATE_ID_CONTACT = import.meta.env.VITE_EMAIL_TEMPLATE_ID_CONTACT;
-import emailjs from 'emailjs-com';
 
 const ContactUsPage = () => {
   const [name, setName] = useState('');
@@ -60,11 +61,11 @@ const ContactUsPage = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1 className="text-center">Contact Us</h1>
+    <div className={styles.container}>
+      <h1 className="text-center display-4 mb-5">Contact Us</h1>
 
       {errors.length > 0 && (
-        <Alert variant="danger">
+        <Alert variant="danger" className={styles.alert}>
           <ul>
             {errors.map((error, index) => (
               <li key={index}>{error} is required.</li>
@@ -74,36 +75,40 @@ const ContactUsPage = () => {
       )}
 
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formName" className="mb-3">
+        <Form.Group controlId="formName" className={styles.formGroup}>
           <Form.Label>Name <span className="text-danger">*</span></Form.Label>
           <Form.Control
             type="text"
             placeholder="Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className={styles.formControl}
           />
         </Form.Group>
-        <Form.Group controlId="formEmail" className="mb-3">
+
+        <Form.Group controlId="formEmail" className={styles.formGroup}>
           <Form.Label>Email <span className="text-danger">*</span></Form.Label>
           <Form.Control
             type="email"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={styles.formControl}
           />
         </Form.Group>
 
-        <Form.Group controlId="formPhone" className="mb-3">
+        <Form.Group controlId="formPhone" className={styles.formGroup}>
           <Form.Label>Phone <span className="text-danger">*</span></Form.Label>
           <Form.Control
             type="text"
             placeholder="Your Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            className={styles.formControl}
           />
         </Form.Group>
 
-        <Form.Group controlId="formMessage" className="mb-3">
+        <Form.Group controlId="formMessage" className={styles.formGroup}>
           <Form.Label>Message <span className="text-danger">*</span></Form.Label>
           <Form.Control
             as="textarea"
@@ -111,29 +116,30 @@ const ContactUsPage = () => {
             placeholder="Your Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className={styles.formControl}
           />
         </Form.Group>
 
         <div className="text-center" style={{ paddingBottom: '1rem' }}>
-          <Button variant="primary" type="submit">Send Message</Button>
+          <Button variant="primary" type="submit" className={styles.button}>Send Message</Button>
         </div>
       </Form>
 
       {messageStatus === 'success' && (
-        <Alert variant="success" className="mt-2">
+        <Alert variant="success" className={styles.alert}>
           Your message has been sent successfully!
         </Alert>
       )}
       {messageStatus === 'error' && (
-        <Alert variant="danger" className="mt-2">
+        <Alert variant="danger" className={styles.alert}>
           There was an error sending your message. Please try again.
         </Alert>
       )}
 
-      <div className="mt-7" style={{paddingBottom: '1rem'}}>
+      <div className="mt-7" style={{ paddingBottom: '1rem' }}>
         <Row>
           <Col md={4}>
-            <Card className="shadow-sm" style={{marginBottom: '1rem'}}>
+            <Card className={styles.card}>
               <Card.Body>
                 <Card.Title><FaEnvelope /> Email Us</Card.Title>
                 <Card.Text>
@@ -143,7 +149,7 @@ const ContactUsPage = () => {
             </Card>
           </Col>
           <Col md={4}>
-            <Card className="shadow-sm" style={{marginBottom: '1rem'}}>
+            <Card className={styles.card}>
               <Card.Body>
                 <Card.Title><FaPhoneAlt /> Call Us</Card.Title>
                 <Card.Text>
@@ -153,7 +159,7 @@ const ContactUsPage = () => {
             </Card>
           </Col>
           <Col md={4}>
-            <Card className="shadow-sm" style={{marginBottom: '1rem'}}>
+            <Card className={styles.card}>
               <Card.Body>
                 <Card.Title><FaMapMarkerAlt /> Visit Us</Card.Title>
                 <Card.Text>

@@ -3,7 +3,7 @@ import React from 'react';
 function Homepage() {
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '50px' }}>
-      <h1>Welcome to the Homepage</h1>
+      <h1 className="text-center display-4 mb-5">Welcome to the Homepage</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada turpis ut orci hendrerit, at laoreet velit fermentum. Integer et metus ac lorem lobortis placerat. Nulla facilisi. Phasellus fermentum dui lorem, ut interdum dui fermentum eu. Curabitur ac interdum justo. Nulla sit amet orci arcu. Morbi euismod, orci non bibendum interdum, mi arcu elementum lorem, a malesuada lorem leo nec ante. Etiam tempus feugiat erat, et feugiat metus iaculis id.
       </p>

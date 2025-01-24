@@ -19,31 +19,8 @@
 }
 
 .navbarLogo:hover {
-  transform: scale(1.5); /* Optional: zoom effect on hover */
+  transform: scale(1.5);
 }
-
-.navbarLinks {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: auto;
-}
-
-.navItem {
-  list-style-type: none;
-}
-
-.navLink {
-  color: #ddd;
-  font-weight: 500;
-  font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.navLink:hover {
-  color: #c90000;
-}
-
 .navbarBrand span {
   font-family: 'Jersey 10', sans-serif;
   font-size: 1.7rem;
