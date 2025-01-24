@@ -61,7 +61,7 @@ const ContactUsPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="container mt-3">
       <h1 className="text-center display-4 mb-5">Contact Us</h1>
 
       {errors.length > 0 && (

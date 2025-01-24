@@ -152,7 +152,7 @@ const GetQuotePage = () => {
   };
 
   return (
-    <div className="container mt-4" style={{paddingBottom: '2rem'}}>
+    <div className="container mt-3" style={{paddingBottom: '2rem'}}>
       <h1 className="text-center display-4 mb-5">Get a Quote</h1>
       
       {errors.length > 0 && (
