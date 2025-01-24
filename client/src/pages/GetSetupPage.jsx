@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import emailjs from 'emailjs-com';
-
+import Select from "react-select";
 const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
@@ -14,16 +14,21 @@ const GetSetupPage = () => {
   const [email, setEmail] = useState('');
   const [yearsInBusiness, setYearsInBusiness] = useState('');
   const [mcNumber, setMcNumber] = useState('');
+  const [shipmentType, setShipmentType] = useState({
+    ltl: false,
+    ftl: false,
+  });
+  
   const [lanesServiced, setLanesServiced] = useState('');
-  const [equipmentType, setEquipmentType] = useState('');
+  const [equipmentType, setEquipmentType] = useState([]);
   const [bankDetails, setBankDetails] = useState({
     name: '',
     accountNumber: '',
     transitNumber: '',
     instituteNumber: ''
   });
-  const [carrierPackage, setCarrierPackage] = useState('');
-  const [insurance, setInsurance] = useState('');
+  const [carrierPackage, setCarrierPackage] = useState(null);
+  const [insurance, setInsurance] = useState(null);
   const [references, setReferences] = useState([
     { companyName: '', personName: '', phoneNumber: '' },
     { companyName: '', personName: '', phoneNumber: '' },
@@ -31,7 +36,14 @@ const GetSetupPage = () => {
   ]);
   const [errors, setErrors] = useState([]);
   const [messageStatus, setMessageStatus] = useState(null);
-
+  
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setShipmentType((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+  };
   const validateForm = () => {
     const newErrors = [];
     if (!name) newErrors.push('Name');
@@ -40,6 +52,7 @@ const GetSetupPage = () => {
     if (!yearsInBusiness) newErrors.push('Years in Business');
     if (!mcNumber) newErrors.push('MC Number');
     if (!lanesServiced) newErrors.push('Lanes you service');
+    if(!shipmentType.ftl || !shipmentType.ltl) newErrors.push('Type of Shipment');
     if (!equipmentType) newErrors.push('Type of Equipment');
     if (!bankDetails.name || !bankDetails.accountNumber || !bankDetails.transitNumber || !bankDetails.instituteNumber) {
       newErrors.push('Bank Details');
@@ -60,10 +73,14 @@ const GetSetupPage = () => {
 
     return newErrors.length === 0;
   };
-
-  const handleSubmit = (e) => {
+  const uploadFileToCloud = async (file) => {
+    return "Under Development";
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      const carrierPackageUrl = await uploadFileToCloud(carrierPackage);
+      const insuranceUrl = await uploadFileToCloud(insurance);
       const message = `
         You have received a new carrier partner setup request. Below are the details:
         
@@ -73,9 +90,10 @@ const GetSetupPage = () => {
         - Years in Business: ${yearsInBusiness}
         - MC Number: ${mcNumber}
         - Lanes you service: ${lanesServiced}
-        - Type of Equipment: ${equipmentType}
-        - Carrier Package: ${carrierPackage}
-        - Insurance: ${insurance}
+        - Type of Shipment: ${(shipmentType.ftl ? "FTL" : "") + " - " + (shipmentType.ltl ? "LTL" : "")}
+        - Type of Equipment: ${equipmentType.map((type) => type.value).join(", ")}
+        - Carrier Package: ${carrierPackageUrl}
+        - Insurance: ${insuranceUrl}
         
         Bank Details:
         - Name: ${bankDetails.name}
@@ -103,8 +121,6 @@ const GetSetupPage = () => {
           setMessageStatus('error');
         }
       );
-      
-      // Reset form fields
       setName('');
       setContactNumber('');
       setEmail('');
@@ -140,18 +156,18 @@ const GetSetupPage = () => {
             <Form.Control 
               required
               type="text"
-              placeholder="Your Name"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formContactNumber">
-            <Form.Label>Contact Number <span className="text-danger">*</span></Form.Label>
+            <Form.Label>Phone # <span className="text-danger">*</span></Form.Label>
             <Form.Control 
               required
               type="text"
-              placeholder="Your Contact Number"
+              placeholder="Phone Number"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
             />
@@ -162,7 +178,7 @@ const GetSetupPage = () => {
             <Form.Control 
               required
               type="email"
-              placeholder="Your Email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -186,7 +202,7 @@ const GetSetupPage = () => {
             <Form.Control 
               required
               type="text"
-              placeholder="MC Number"
+              placeholder="MC #"
               value={mcNumber}
               onChange={(e) => setMcNumber(e.target.value)}
             />
@@ -207,22 +223,51 @@ const GetSetupPage = () => {
         </Row>
 
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formEquipmentType">
-            <Form.Label>Type of Equipment <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              required
-              as="select"
-              value={equipmentType}
-              onChange={(e) => setEquipmentType(e.target.value)}
-            >
-              <option value="">Select Equipment</option>
-              <option value="Dry Van">Dry Van</option>
-              <option value="Refrigerated">Refrigerated</option>
-              <option value="Flatbed">Flatbed</option>
-              <option value="Low Boy">Low Boy</option>
-            </Form.Control>
+          <Form.Group as={Col} controlId="formShipmentType">
+            <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
+            <div className="d-flex">
+            <Form.Check
+              type="checkbox"
+              label="LTL"
+              name="ltl"
+              checked={shipmentType.ltl}
+              onChange={handleCheckboxChange}
+              style={{ paddingRight: '2rem' }}
+            />
+            <Form.Check
+              type="checkbox"
+              label="FTL"
+              name="ftl"
+              checked={shipmentType.ftl}
+              onChange={handleCheckboxChange}
+            />
+            </div>
           </Form.Group>
         </Row>
+
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formEquipmentType">
+            <Form.Label>
+              Type of Equipment <span className="text-danger">*</span>
+            </Form.Label>
+            <Select
+              isMulti
+              options={[
+                { value: "Dry Van", label: "Dry Van" },
+                { value: "Refrigerated", label: "Refrigerated" },
+                { value: "Flatbed/Roll-tite", label: "Flatbed/Roll-tite" },
+                { value: "Intermodal/Rail", label: "Intermodal/Rail" },
+                { value: "Low Boy", label: "Low Boy" },
+                { value: "Straight Truck", label: "Straight Truck" },
+                { value: "Sprinter Van", label: "Sprinter Van" },
+              ]}
+              value={equipmentType}
+              onChange={(selected) => setEquipmentType(selected)}
+              placeholder="Select Equipment Types"
+            />
+          </Form.Group>
+        </Row>
+
 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formBankDetails">
@@ -230,7 +275,7 @@ const GetSetupPage = () => {
             <Form.Control
               required
               type="text"
-              placeholder="Name"
+              placeholder="Bank Name"
               value={bankDetails.name}
               onChange={(e) => setBankDetails({ ...bankDetails, name: e.target.value })}
             />
@@ -259,33 +304,31 @@ const GetSetupPage = () => {
         </Row>
 
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formCarrierPackage">
-            <Form.Label>Carrier Package <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Carrier Package"
-              value={carrierPackage}
-              onChange={(e) => setCarrierPackage(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group as={Col} controlId="formCarrierPackage">
+          <Form.Label>Carrier Package <span className="text-danger">*</span></Form.Label>
+          <Form.Control 
+            required
+            type="file"
+            placeholder="Carrier Package"
+            onChange={(e) => setCarrierPackage(e.target.files[0])}
+          />
+        </Form.Group>
 
-          <Form.Group as={Col} controlId="formInsurance">
-            <Form.Label>Insurance <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Insurance"
-              value={insurance}
-              onChange={(e) => setInsurance(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group as={Col} controlId="formInsurance">
+          <Form.Label>Insurance <span className="text-danger">*</span></Form.Label>
+          <Form.Control 
+            required
+            type="file"
+            placeholder="Insurance"
+            onChange={(e) => setInsurance(e.target.files[0])}
+          />
+        </Form.Group>
         </Row>
 
         <Row className="mb-3">
           {references.map((reference, index) => (
             <div key={index} className="mb-3">
-              <h5>Reference {index + 1}</h5>
+              <h5>Reference {index + 1} <span className="text-danger">*</span></h5>
               <Form.Group as={Col} controlId={`formReferenceCompanyName${index}`}>
                 <Form.Label>Company Name</Form.Label>
                 <Form.Control

@@ -9,7 +9,7 @@ import ContactUs from "./pages/ContactUs";
 import GetQuotePage from "./pages/GetQuotePage";
 import GetSetupPage from "./pages/GetSetupPage";
 import Footer from "./components/Footer"; 
-import logo from './assets/logos/original_processed.png';
+import logo from '/original_processed.png';
 import './App.css';
 import About from "./pages/About";
 import 'font-awesome/css/font-awesome.min.css';
