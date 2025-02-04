@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styles from '../styles/AboutUs.module.css';
 
 const About = () => {
@@ -119,9 +120,11 @@ const About = () => {
           <p className={styles.description}>
             💡 Who’s ready to be part of the dream team? Hit "Get a Quote" and let’s start this beautiful journey together! 🚛🚢
           </p>
-          <Button variant="primary" type='submit'>
-            Get a Quote
-          </Button>
+          <div className={styles.buttonDiv}>
+            <Link to="/quote">
+              Get a Quote
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>

@@ -124,6 +124,23 @@
   width: 100%;
 }
 
+.buttonDiv a {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.buttonDiv a:hover {
+  background-color: hsla(6, 100%, 50%, 0.901);
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
   .ourStoryWrapper {

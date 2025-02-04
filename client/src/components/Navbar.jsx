@@ -39,11 +39,6 @@ const Navbar = ({ logoSrc }) => {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/about" onClick={handleLinkClick}>
-                ABOUT
-              </Link>
-            </li>
-            <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/services" onClick={handleLinkClick}>
                 SERVICES
               </Link>

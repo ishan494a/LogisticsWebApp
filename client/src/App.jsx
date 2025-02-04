@@ -11,7 +11,7 @@ import GetSetupPage from "./pages/GetSetupPage";
 import Footer from "./components/Footer"; 
 import logo from '/original_processed.png';
 import './App.css';
-import About from "./pages/About";
+import About from "./components/About";
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -25,7 +25,6 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/quote" element={<GetQuotePage />} />
         <Route path="/setup" element={<GetSetupPage />} />
-        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </Router>
