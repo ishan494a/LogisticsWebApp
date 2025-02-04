@@ -89,6 +89,15 @@ button[type="submit"]:hover {
     padding-right: 15px;
   }
 
+  .navbar-toggler {
+    margin: 0 auto;
+    display: block;
+  }
+
+  .navbar-collapse {
+    justify-content: center;
+  }
+
   .card-body {
     padding: 20px;
   }

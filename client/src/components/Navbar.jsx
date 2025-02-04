@@ -19,7 +19,7 @@ const Navbar = ({ logoSrc }) => {
       <div className="container-fluid">
         <Link className={`${styles.navbarBrand} navbar-brand`} to="/">
           <img src={logoSrc} alt="Logo" className={`${styles.navbarLogo} me-2`} />
-          <span>GM Supply Chain Solutions</span>
+          <span>GM SUPPLY CHAIN SOLUTIONS</span>
         </Link>
         <button
           className="navbar-toggler"
@@ -35,32 +35,32 @@ const Navbar = ({ logoSrc }) => {
           <ul className={`${styles.navbarLinks} navbar-nav ms-auto`}>
             <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/" onClick={handleLinkClick}>
-                Home
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/services" onClick={handleLinkClick}>
-                Services
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/quote" onClick={handleLinkClick}>
-                Get a Quote
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/setup" onClick={handleLinkClick}>
-                Get Yourself Setup
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link className={`${styles.navLink} nav-link`} to="/contact" onClick={handleLinkClick}>
-                Contact Us
+                HOME
               </Link>
             </li>
             <li className={styles.navItem}>
               <Link className={`${styles.navLink} nav-link`} to="/about" onClick={handleLinkClick}>
-                About
+                ABOUT
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/services" onClick={handleLinkClick}>
+                SERVICES
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/quote" onClick={handleLinkClick}>
+                GET A QUOTE
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/setup" onClick={handleLinkClick}>
+                GET YOURSELF SETUP
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link className={`${styles.navLink} nav-link`} to="/contact" onClick={handleLinkClick}>
+                CONTACT US
               </Link>
             </li>
           </ul>

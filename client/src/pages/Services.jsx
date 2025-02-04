@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/Services.module.css';
+import { Link } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const services = [
   {
     title: 'Freight Brokerage Services',
     description:
       'We connect shippers with reliable carriers, ensuring that your goods are transported efficiently and on time. With a vast network of trusted carriers and cutting-edge technology, we guarantee competitive pricing and seamless communication from pickup to delivery.',
-    image: '/expedited.png', 
+    image: '/expedited.png',
   },
   {
     title: 'Full Truckload (FTL) Shipping',
     description:
       'Have a large shipment? We specialize in securing capacity for full truckload shipments across the country. Whether it’s dry van, flatbed, or refrigerated freight, we’ve got you covered.',
-    image: '/expedited.png', 
+    image: '/expedited.png',
   },
   {
     title: 'Less Than Truckload (LTL) Shipping',
@@ -43,43 +46,65 @@ const services = [
     title: 'Supply Chain Consulting',
     description:
       'Optimize your logistics strategy with our expert guidance. From improving routing efficiency to reducing costs, we’ll work with you to streamline your supply chain operations.',
-    image: '/expedited.png', 
+    image: '/expedited.png',
   },
 ];
 
-const Services = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+const ServiceItem = ({ service, index }) => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index); 
+  React.useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const variants = {
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    hidden: { opacity: 0, y: 50 },
   };
 
+  const isEven = index % 2 === 0;
+
   return (
-    <div className="container mt-3">
-      <h1 className="text-center display-4 mb-5">Our Services</h1>
-      {services.map((service, index) => (
-        <div key={index} className={styles.serviceCard}>
-          <div onClick={() => handleToggle(index)} className={styles.serviceTitle}>
-            <span className={styles.serviceTitleText}>{service.title}</span>
-            <i
-              className={`fa fa-chevron-down ${openIndex === index ? styles.rotate180 : ''}`}
-              style={{ fontSize: '20px' }}
-            ></i>
-          </div>
-          <div
-            className={`${styles.serviceDescription} ${openIndex === index ? styles.open : ''}`}
-          >
-            <div className={styles.serviceContent}>
-              <img
-                src={service.image}
-                alt={service.title}
-                className={styles.serviceImage}
-              />
-              <p>{service.description}</p>
-            </div>
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={variants}
+      className={`${styles.serviceItem} ${isEven ? styles.even : styles.odd}`}
+    >
+      <div className={styles.serviceContent}>
+        <img src={service.image} alt={service.title} className={styles.serviceImage} />
+        <div className={styles.serviceText}>
+          <h3 className={styles.serviceTitle}>{service.title}</h3>
+          <p className={styles.serviceDescription}>{service.description}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Services = () => {
+  return (
+    <div>
+      <div className={styles.serviceImageWrapper}>
+        <div className={styles.card}>
+          <h2 className={styles.cardTitle}>Our Services</h2>
+          <p className={styles.cardText}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+          </p>
+          <div className={styles.buttonDiv}>
+            <Link to="/quote">REQUEST A QUOTE</Link>
           </div>
         </div>
-      ))}
+      </div>
+      <div className={styles.servicesContainer}>
+        {services.map((service, index) => (
+          <ServiceItem key={index} service={service} index={index} />
+        ))}
+      </div>
     </div>
   );
 };

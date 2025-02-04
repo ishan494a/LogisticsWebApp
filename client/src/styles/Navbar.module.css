@@ -12,8 +12,8 @@
 }
 
 .navbarLogo {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   transform: scale(1.4);
   transition: transform 0.3s ease;
 }
@@ -23,5 +23,5 @@
 }
 .navbarBrand span {
   font-family: 'Jersey 10', sans-serif;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
 }

@@ -439,7 +439,9 @@ const GetQuotePage = () => {
               <option value="flatbed">Flatbed</option>
               <option value="rollTite">Roll-tite</option>
               <option value="lowBoy">Low boy</option>
-              <option value="rgn">RGN</option>
+              <option value="Intermodal/Rail">Intermodal/Rail</option>
+              <option value="straightTruck">Straight Truck</option>
+              <option value="sprinter">Sprinter</option>
             </Form.Control>
           </Form.Group>
         </Row>

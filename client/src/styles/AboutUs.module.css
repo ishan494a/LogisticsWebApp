@@ -1,0 +1,177 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ourStoryWrapper {
+  width: 100%;
+  min-height: 70vh; 
+  overflow: hidden;
+  position: relative;
+  background-image: url('/expedited.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  padding: 2rem;
+}
+
+.ourStoryCard {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 90%;
+  width: 800px;
+  overflow-y: auto; 
+  max-height: 80vh; 
+}
+
+.ourStoryTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ourStoryText {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 4rem;
+  width: 100%; 
+}
+
+.textContainer {
+  flex: 1;
+  min-width: 300px;
+}
+
+.subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #34495e;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.image {
+  flex: 1;
+  min-width: 300px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.list li .bullet {
+  font-size: 1.2rem;
+  color: #3498db;
+  margin-right: 0.8rem;
+}
+
+.list li strong {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ctaContainer {
+  text-align: center;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .ourStoryWrapper {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .ourStoryCard {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .ourStoryTitle {
+    font-size: 1.8rem;
+  }
+
+  .ourStoryText {
+    font-size: 1rem;
+  }
+
+  .gridContainer {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .textContainer {
+    order: 2;
+  }
+
+  .image {
+    order: 1;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .list li {
+    font-size: 1rem;
+  }
+
+  .ctaContainer {
+    padding: 0 1rem;
+  }
+}

@@ -136,6 +136,21 @@ const GetSetupPage = () => {
   };
 
   return (
+   <div className="page-container" style={{ position: 'relative', paddingBottom: '2rem' }}>
+      <div 
+        className="background-image" 
+        style={{
+          position: 'absolute', 
+          top: 0, 
+          left: 0, 
+          right: 0, 
+          bottom: 0,
+          background: `url('/truckload.png') no-repeat center center fixed`, 
+          backgroundSize: 'cover',
+          filter: 'blur(5px)',
+          zIndex: -1,
+        }} 
+      ></div>
     <div className="container mt-3" style={{ paddingBottom: '2rem' }}>
       <h1 className="text-center display-4 mb-5">Carrier Setup</h1>
       
@@ -149,233 +164,332 @@ const GetSetupPage = () => {
         </Alert>
       )}
 
-      <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formName">
-            <Form.Label>Name <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
+<Form onSubmit={handleSubmit}>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formName">
+      <Form.Label>Name <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
 
-          <Form.Group as={Col} controlId="formContactNumber">
-            <Form.Label>Phone # <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="Phone Number"
-              value={contactNumber}
-              onChange={(e) => setContactNumber(e.target.value)}
-            />
-          </Form.Group>
+    <Form.Group as={Col} controlId="formContactNumber">
+      <Form.Label>Phone # <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="text"
+        placeholder="Phone Number"
+        value={contactNumber}
+        onChange={(e) => setContactNumber(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
 
-          <Form.Group as={Col} controlId="formEmail">
-            <Form.Label>Email <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-        </Row>
+    <Form.Group as={Col} controlId="formEmail">
+      <Form.Label>Email <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formYearsInBusiness">
-            <Form.Label>Number of Years in Business <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="number"
-              placeholder="Years in Business"
-              value={yearsInBusiness}
-              onChange={(e) => setYearsInBusiness(e.target.value)}
-            />
-          </Form.Group>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formYearsInBusiness">
+      <Form.Label>Number of Years in Business <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="number"
+        placeholder="Years in Business"
+        value={yearsInBusiness}
+        onChange={(e) => setYearsInBusiness(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
 
-          <Form.Group as={Col} controlId="formMcNumber">
-            <Form.Label>MC Number <span className="text-danger">*</span></Form.Label>
-            <Form.Control 
-              required
-              type="text"
-              placeholder="MC #"
-              value={mcNumber}
-              onChange={(e) => setMcNumber(e.target.value)}
-            />
-          </Form.Group>
-        </Row>
+    <Form.Group as={Col} controlId="formMcNumber">
+      <Form.Label>MC Number <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="text"
+        placeholder="MC #"
+        value={mcNumber}
+        onChange={(e) => setMcNumber(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formLanesServiced">
-            <Form.Label>Lanes You Service <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Lanes You Service"
-              value={lanesServiced}
-              onChange={(e) => setLanesServiced(e.target.value)}
-            />
-          </Form.Group>
-        </Row>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formLanesServiced">
+      <Form.Label>Lanes You Service <span className="text-danger">*</span></Form.Label>
+      <Form.Control
+        required
+        type="text"
+        placeholder="Lanes You Service"
+        value={lanesServiced}
+        onChange={(e) => setLanesServiced(e.target.value)}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formShipmentType">
-            <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
-            <div className="d-flex">
-            <Form.Check
-              type="checkbox"
-              label="LTL"
-              name="ltl"
-              checked={shipmentType.ltl}
-              onChange={handleCheckboxChange}
-              style={{ paddingRight: '2rem' }}
-            />
-            <Form.Check
-              type="checkbox"
-              label="FTL"
-              name="ftl"
-              checked={shipmentType.ftl}
-              onChange={handleCheckboxChange}
-            />
-            </div>
-          </Form.Group>
-        </Row>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formShipmentType">
+      <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
+      <div className="d-flex">
+        <Form.Check
+          type="checkbox"
+          label="LTL"
+          name="ltl"
+          checked={shipmentType.ltl}
+          onChange={handleCheckboxChange}
+          style={{ paddingRight: '2rem' }}
+        />
+        <Form.Check
+          type="checkbox"
+          label="FTL"
+          name="ftl"
+          checked={shipmentType.ftl}
+          onChange={handleCheckboxChange}
+        />
+      </div>
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formEquipmentType">
-            <Form.Label>
-              Type of Equipment <span className="text-danger">*</span>
-            </Form.Label>
-            <Select
-              isMulti
-              options={[
-                { value: "Dry Van", label: "Dry Van" },
-                { value: "Refrigerated", label: "Refrigerated" },
-                { value: "Flatbed/Roll-tite", label: "Flatbed/Roll-tite" },
-                { value: "Intermodal/Rail", label: "Intermodal/Rail" },
-                { value: "Low Boy", label: "Low Boy" },
-                { value: "Straight Truck", label: "Straight Truck" },
-                { value: "Sprinter Van", label: "Sprinter Van" },
-              ]}
-              value={equipmentType}
-              onChange={(selected) => setEquipmentType(selected)}
-              placeholder="Select Equipment Types"
-            />
-          </Form.Group>
-        </Row>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formEquipmentType" >
+      <Form.Label>
+        Type of Equipment <span className="text-danger">*</span>
+      </Form.Label>
+      <Select
+  isMulti
+  options={[
+    { value: "Dry Van", label: "Dry Van" },
+    { value: "Refrigerated", label: "Refrigerated" },
+    { value: "Flatbed", label: "Flatbed" },
+    { value: "Roll-tite", label: "Roll-tite" },
+    { value: "Intermodal/Rail", label: "Intermodal/Rail" },
+    { value: "Low Boy", label: "Low Boy" },
+    { value: "Straight Truck", label: "Straight Truck" },
+    { value: "Sprinter Van", label: "Sprinter Van" },
+  ]}
+  value={equipmentType}
+  onChange={(selected) => setEquipmentType(selected)}
+  placeholder="Select Equipment Types"
+    styles={{
+      control: (base) => ({
+        ...base,
+        opacity: 0.6,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        border: '1px solid #ced4da',
+      }),
+      multiValue: (base) => ({
+        ...base,
+        backgroundColor: 'rgba(0, 123, 255, 0.3)', // Light blue background for selected items
+      }),
+      multiValueLabel: (base) => ({
+        ...base,
+        color: '#007bff', // Blue color for text in selected items
+      }),
+      multiValueRemove: (base) => ({
+        ...base,
+        color: '#dc3545', // Red color for the remove button
+        ':hover': {
+          backgroundColor: 'rgba(220, 53, 69, 0.1)', // Light red on hover
+        },
+      }),
+    }}
+  />
 
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formBankDetails">
-            <Form.Label>Bank Details <span className="text-danger">*</span></Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Bank Name"
-              value={bankDetails.name}
-              onChange={(e) => setBankDetails({ ...bankDetails, name: e.target.value })}
-            />
-            <Form.Control
-              required
-              type="text"
-              placeholder="Account Number"
-              value={bankDetails.accountNumber}
-              onChange={(e) => setBankDetails({ ...bankDetails, accountNumber: e.target.value })}
-            />
-            <Form.Control
-              required
-              type="text"
-              placeholder="Transit Number"
-              value={bankDetails.transitNumber}
-              onChange={(e) => setBankDetails({ ...bankDetails, transitNumber: e.target.value })}
-            />
-            <Form.Control
-              required
-              type="text"
-              placeholder="Institute Number"
-              value={bankDetails.instituteNumber}
-              onChange={(e) => setBankDetails({ ...bankDetails, instituteNumber: e.target.value })}
-            />
-          </Form.Group>
-        </Row>
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formBankDetails">
+      <Form.Label>Bank Details <span className="text-danger">*</span></Form.Label>
+      <Form.Control
+        required
+        type="text"
+        placeholder="Bank Name"
+        value={bankDetails.name}
+        onChange={(e) => setBankDetails({ ...bankDetails, name: e.target.value })}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+      <Form.Control
+        required
+        type="text"
+        placeholder="Account Number"
+        value={bankDetails.accountNumber}
+        onChange={(e) => setBankDetails({ ...bankDetails, accountNumber: e.target.value })}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+      <Form.Control
+        required
+        type="text"
+        placeholder="Transit Number"
+        value={bankDetails.transitNumber}
+        onChange={(e) => setBankDetails({ ...bankDetails, transitNumber: e.target.value })}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+      <Form.Control
+        required
+        type="text"
+        placeholder="Institute Number"
+        value={bankDetails.instituteNumber}
+        onChange={(e) => setBankDetails({ ...bankDetails, instituteNumber: e.target.value })}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+  </Row>
 
-        <Row className="mb-3">
-        <Form.Group as={Col} controlId="formCarrierPackage">
-          <Form.Label>Carrier Package <span className="text-danger">*</span></Form.Label>
-          <Form.Control 
-            required
-            type="file"
-            placeholder="Carrier Package"
-            onChange={(e) => setCarrierPackage(e.target.files[0])}
+  <Row className="mb-3">
+    <Form.Group as={Col} controlId="formCarrierPackage">
+      <Form.Label>Carrier Package <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="file"
+        placeholder="Carrier Package"
+        onChange={(e) => setCarrierPackage(e.target.files[0])}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+
+    <Form.Group as={Col} controlId="formInsurance">
+      <Form.Label>Insurance <span className="text-danger">*</span></Form.Label>
+      <Form.Control 
+        required
+        type="file"
+        placeholder="Insurance"
+        onChange={(e) => setInsurance(e.target.files[0])}
+        style={{
+          opacity: 0.6,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #ced4da',
+        }}
+      />
+    </Form.Group>
+  </Row>
+
+  <Row className="mb-3">
+    {references.map((reference, index) => (
+      <div key={index} className="mb-3">
+        <h5>Reference {index + 1} <span className="text-danger">*</span></h5>
+        <Form.Group as={Col} controlId={`formReferenceCompanyName${index}`}>
+          <Form.Label>Company Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Company Name"
+            value={reference.companyName}
+            onChange={(e) => {
+              const updatedReferences = [...references];
+              updatedReferences[index].companyName = e.target.value;
+              setReferences(updatedReferences);
+            }}
+            style={{
+              opacity: 0.6,
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              border: '1px solid #ced4da',
+            }}
           />
         </Form.Group>
-
-        <Form.Group as={Col} controlId="formInsurance">
-          <Form.Label>Insurance <span className="text-danger">*</span></Form.Label>
-          <Form.Control 
-            required
-            type="file"
-            placeholder="Insurance"
-            onChange={(e) => setInsurance(e.target.files[0])}
+        <Form.Group as={Col} controlId={`formReferencePersonName${index}`}>
+          <Form.Label>Person Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Person Name"
+            value={reference.personName}
+            onChange={(e) => {
+              const updatedReferences = [...references];
+              updatedReferences[index].personName = e.target.value;
+              setReferences(updatedReferences);
+            }}
+            style={{
+              opacity: 0.6,
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              border: '1px solid #ced4da',
+            }}
           />
         </Form.Group>
-        </Row>
+        <Form.Group as={Col} controlId={`formReferencePhoneNumber${index}`}>
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Phone Number"
+            value={reference.phoneNumber}
+            onChange={(e) => {
+              const updatedReferences = [...references];
+              updatedReferences[index].phoneNumber = e.target.value;
+              setReferences(updatedReferences);
+            }}
+            style={{
+              opacity: 0.6,
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              border: '1px solid #ced4da',
+            }}
+          />
+        </Form.Group>
+      </div>
+    ))}
+  </Row>
 
-        <Row className="mb-3">
-          {references.map((reference, index) => (
-            <div key={index} className="mb-3">
-              <h5>Reference {index + 1} <span className="text-danger">*</span></h5>
-              <Form.Group as={Col} controlId={`formReferenceCompanyName${index}`}>
-                <Form.Label>Company Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Company Name"
-                  value={reference.companyName}
-                  onChange={(e) => {
-                    const updatedReferences = [...references];
-                    updatedReferences[index].companyName = e.target.value;
-                    setReferences(updatedReferences);
-                  }}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId={`formReferencePersonName${index}`}>
-                <Form.Label>Person Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Person Name"
-                  value={reference.personName}
-                  onChange={(e) => {
-                    const updatedReferences = [...references];
-                    updatedReferences[index].personName = e.target.value;
-                    setReferences(updatedReferences);
-                  }}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId={`formReferencePhoneNumber${index}`}>
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Phone Number"
-                  value={reference.phoneNumber}
-                  onChange={(e) => {
-                    const updatedReferences = [...references];
-                    updatedReferences[index].phoneNumber = e.target.value;
-                    setReferences(updatedReferences);
-                  }}
-                />
-              </Form.Group>
-            </div>
-          ))}
-        </Row>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
+</Form>
 
       {messageStatus && (
         <Modal show={true} onHide={() => setMessageStatus(null)}>
@@ -387,6 +501,7 @@ const GetSetupPage = () => {
           </Modal.Body>
         </Modal>
       )}
+    </div>
     </div>
   );
 };
