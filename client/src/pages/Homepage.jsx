@@ -67,10 +67,16 @@ function Homepage() {
             <p>Optimize your logistics strategy.</p>
           </div>
         </div>
+        <div className="text-center">
+          <div className={styles.buttonDiv}>
+            <Link to="/services">
+              View All &gt;&gt;
+            </Link>
+          </div>
+        </div>
       </div>
-
-      {/* About Section */}
-      <About />
+      {/* About us section */}
+      <About/>
     </div>
   );
 }
