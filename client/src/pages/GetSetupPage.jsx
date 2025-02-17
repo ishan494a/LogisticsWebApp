@@ -137,20 +137,6 @@ const GetSetupPage = () => {
 
   return (
    <div className="page-container" style={{ position: 'relative', paddingBottom: '2rem' }}>
-      <div 
-        className="background-image" 
-        style={{
-          position: 'absolute', 
-          top: 0, 
-          left: 0, 
-          right: 0, 
-          bottom: 0,
-          background: `url('/truckload.png') no-repeat center center fixed`, 
-          backgroundSize: 'cover',
-          filter: 'blur(5px)',
-          zIndex: -1,
-        }} 
-      ></div>
     <div className="container mt-3" style={{ paddingBottom: '2rem' }}>
       <h1 className="text-center display-4 mb-5">Carrier Setup</h1>
       

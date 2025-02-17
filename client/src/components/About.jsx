@@ -30,7 +30,7 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <img src="/expedited.png" alt="Our Vision" className={styles.image} />
+          <img src="/cross_border.png" alt="Our Vision" className={styles.image} />
           <div className={styles.textContainer}>
             <h2 className={styles.subtitle}>Our Vision</h2>
             <p className={styles.description}>
@@ -103,7 +103,7 @@ const About = () => {
               </li>
             </ul>
           </div>
-          <img src="/expedited.png" alt="Why Choose Us" className={styles.image} />
+          <img src="/tracking.png" alt="Why Choose Us" className={styles.image} />
         </motion.div>
 
         <motion.div

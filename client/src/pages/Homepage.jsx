@@ -9,7 +9,7 @@ function Homepage() {
     <div>
       <div
         className={`${styles.heroSection} text-center text-white py-5`}
-        style={{ backgroundImage: `url(/expedited.png)` }}
+        style={{ backgroundImage: `url(/highway-night.jpg)` }}
       >
         <div className={styles.blurredCard}>
           <h1 className={styles.cardTitle}>Your Trusted Partner in Logistics</h1>
@@ -32,7 +32,7 @@ function Homepage() {
         <div className="row">
           <div className="col-md-3 text-center">
             <img
-              src="/expedited.png"
+              src="/freight_broker.png"
               alt="Freight Brokerage"
               className={`img-fluid mb-3 ${styles.serviceIcon}`}
             />
@@ -41,7 +41,7 @@ function Homepage() {
           </div>
           <div className="col-md-3 text-center">
             <img
-              src="/expedited.png"
+              src="/truckload.png"
               alt="FTL Shipping"
               className={`img-fluid mb-3 ${styles.serviceIcon}`}
             />
@@ -59,7 +59,7 @@ function Homepage() {
           </div>
           <div className="col-md-3 text-center">
             <img
-              src="/expedited.png"
+              src="/supply_chain_consulting.png"
               alt="Supply Chain Consulting"
               className={`img-fluid mb-3 ${styles.serviceIcon}`}
             />

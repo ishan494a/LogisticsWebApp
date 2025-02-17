@@ -10,19 +10,19 @@ const services = [
     title: 'Freight Brokerage Services',
     description:
       'We connect shippers with reliable carriers, ensuring that your goods are transported efficiently and on time. With a vast network of trusted carriers and cutting-edge technology, we guarantee competitive pricing and seamless communication from pickup to delivery.',
-    image: '/expedited.png',
+    image: '/freight_broker.png',
   },
   {
     title: 'Full Truckload (FTL) Shipping',
     description:
       'Have a large shipment? We specialize in securing capacity for full truckload shipments across the country. Whether it’s dry van, flatbed, or refrigerated freight, we’ve got you covered.',
-    image: '/expedited.png',
+    image: '/truckload.png',
   },
   {
     title: 'Less Than Truckload (LTL) Shipping',
     description:
       'For smaller shipments, our LTL solutions help you save money while ensuring your freight reaches its destination safely. We’ll consolidate your shipment with others to optimize cost and efficiency.',
-    image: '/expedited.png',
+    image: '/LTL.png',
   },
   {
     title: 'Expedited Freight Services',
@@ -34,19 +34,19 @@ const services = [
     title: 'Dedicated Lane Management',
     description:
       'Looking for consistency and reliability? We offer dedicated lane management solutions that provide stable pricing, guaranteed capacity, and enhanced supply chain visibility.',
-    image: '/expedited.png',
+    image: '/dedicated_lanes.png',
   },
   {
     title: 'Intermodal Transportation',
     description:
       'Combine the efficiency of rail with the flexibility of trucking to reduce costs and carbon emissions. Our intermodal solutions are a smart way to move your freight over long distances.',
-    image: '/expedited.png',
+    image: '/intermodal_transportation.png',
   },
   {
     title: 'Supply Chain Consulting',
     description:
       'Optimize your logistics strategy with our expert guidance. From improving routing efficiency to reducing costs, we’ll work with you to streamline your supply chain operations.',
-    image: '/expedited.png',
+    image: '/supply_chain_consulting.png',
   },
 ];
 
