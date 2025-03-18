@@ -143,7 +143,7 @@ const ContactUsPage = () => {
               <Card.Body>
                 <Card.Title><FaEnvelope /> Email Us</Card.Title>
                 <Card.Text>
-                  <strong>Email:</strong> support@example.com
+                <a href="mailto:amitmittal495@gmail.com">amitmittal495@gmail.com</a>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -153,7 +153,7 @@ const ContactUsPage = () => {
               <Card.Body>
                 <Card.Title><FaPhoneAlt /> Call Us</Card.Title>
                 <Card.Text>
-                  <strong>Phone:</strong> (123) 456-7890
+                <a href="tel:+14163884807">(416) 388-4807</a>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -163,7 +163,7 @@ const ContactUsPage = () => {
               <Card.Body>
                 <Card.Title><FaMapMarkerAlt /> Visit Us</Card.Title>
                 <Card.Text>
-                  <strong>Address:</strong> 123 Business Street, City, Country
+                <a href="https://www.google.com/maps?q=4+Wild+Indigo+Crescent,+Brampton,+ON" target="_blank">4 Wild Indigo Crescent, Brampton, ON</a>
                 </Card.Text>
               </Card.Body>
             </Card>
