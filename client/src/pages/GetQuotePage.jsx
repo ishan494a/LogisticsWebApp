@@ -215,13 +215,11 @@ const GetQuotePage = () => {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formPickupAddress">
           <Form.Label>Pickup Address <span className="text-danger">*</span></Form.Label>
-          <GooglePlacesAutocomplete
-            apiKey={PLACES_API_KEY}
-            selectProps={{
-              value: pickupAddress,
-              onChange: (value) => setPickupAddress(value),
-              placeholder: "Start Typing...",
-            }}
+          <Form.Control
+            type="pickupaddress" 
+            placeholder="Pickup Address" 
+            value={pickupAddress}
+            onChange={(e) => setPickupAddress(e.target.value)} 
           />
         </Form.Group>
       </Row>
@@ -229,13 +227,11 @@ const GetQuotePage = () => {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formDeliveryAddress">
           <Form.Label>Delivery Address <span className="text-danger">*</span></Form.Label>
-          <GooglePlacesAutocomplete
-            apiKey={PLACES_API_KEY}
-            selectProps={{
-              value: deliveryAddress,
-              onChange: (value) => setDeliveryAddress(value),
-              placeholder: "Start Typing...",
-            }}
+          <Form.Control
+            type="deliveryaddress" 
+            placeholder="Delivery Address" 
+            value={deliveryAddress}
+            onChange={(e) => setDeliveryAddress(e.target.value)} 
           />
         </Form.Group>
       </Row>
