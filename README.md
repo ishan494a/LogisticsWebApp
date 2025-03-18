@@ -18,4 +18,4 @@ This is a logistics web application built with **Vite**, **EmailJS**, and **Goog
 
 ## Demo
 
-The app is deployed and accessible [here](https://gmscs.netlify.app/).
+The app is deployed and accessible [here](https://gmscs.ca/).
