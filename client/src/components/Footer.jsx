@@ -6,12 +6,6 @@ const Footer = () => {
     <footer className="bg-dark text-light text-center py-3" style={{ borderTop: '4px solid #c90000' }}>
       <div className="container">
         <div className="d-flex justify-content-center">
-          <div className="m-3">
-            <h4>Contact Us</h4>
-            <p><FaMapMarkerAlt /> <a href="https://www.google.com/maps?q=4+Wild+Indigo+Crescent,+Brampton,+ON" target="_blank" className="text-light">4 Wild Indigo Crescent, Brampton, ON</a></p>
-          </div>
-        </div>
-        <div className="d-flex justify-content-center">
         <a href="tel:+14163884807" className="text-light mx-2">
             <FaPhoneAlt size={24} />
           </a>
