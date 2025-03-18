@@ -93,7 +93,7 @@ const Services = () => {
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
           <p className={styles.cardText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+          At GM Supply Chain Solutions, we offer a wide range of logistics solutions designed to meet the unique needs of each client. Our services are tailored to ensure timely deliveries, cost efficiency, and seamless communication, helping businesses move goods across the country with ease and reliability.
           </p>
           <div className={styles.buttonDiv}>
             <Link to="/quote">REQUEST A QUOTE</Link>
