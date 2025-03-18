@@ -34,21 +34,12 @@ const GetQuotePage = () => {
   const [temperatureRequired, setTemperatureRequired] = useState('');
   const [temperatureUnit, setTemperatureUnit] = useState('C');
   const [specialRequirements, setSpecialRequirements] = useState('');
-  
-  const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [messageStatus, setMessageStatus] = useState(null);
 
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => {
-    const initialSkidDimensions = Array.from({ length: numberOfSkids }).map(() => ({
-      length: '',
-      width: '',
-      height: ''
-    }));
-    setSkidDimensions(initialSkidDimensions);
-    setShowModal(true);
-  };
+  const handleAddMore = () => {
+    alert("add more"); // Debugger
+  }
   const handleSkidChange = (index, dimension, value) => {
     const updatedSkids = [...skidDimensions];
     if (!updatedSkids[index]) {
@@ -221,7 +212,7 @@ const GetQuotePage = () => {
           </Form.Group>
         </Row>
 
-<Row className="mb-3">
+      <Row className="mb-3">
         <Form.Group as={Col} controlId="formPickupAddress">
           <Form.Label>Pickup Address <span className="text-danger">*</span></Form.Label>
           <GooglePlacesAutocomplete
@@ -319,52 +310,37 @@ const GetQuotePage = () => {
 
                 {differentDimensions && (
                   <div className="mb-3">
-                    <Button variant="primary" onClick={handleShowModal}>
-                      Set Dimensions for Each Skid
+                    <div className="d-flex">
+                    <Form.Control 
+                      type="number"
+                      placeholder="L"
+                      value={dimensions.length}
+                      onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
+                    />
+                    <Form.Control 
+                      type="number"
+                      placeholder="W"
+                      value={dimensions.width}
+                      onChange={(e) => setDimensions({ ...dimensions, width: e.target.value })}
+                    />
+                    <Form.Control 
+                      type="number"
+                      placeholder="H"
+                      value={dimensions.height}
+                      onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
+                    />
+                    <Form.Control
+                      type="number"
+                      placeholder='Number of Skids'
+                    />
+                  </div>
+                    <Button variant="primary" onClick={handleAddMore}>
+                      Add More
                     </Button>
                   </div>
                 )}
               </Form.Group>
             </Row>
-
-            {differentDimensions && (
-              <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Enter Dimensions for Each Skid</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  {Array.from({ length: numberOfSkids }).map((_, index) => (
-                    <div key={index}>
-                      <h5>Skid {index + 1}</h5>
-                      <div className="d-flex mb-3">
-                        <Form.Control
-                          type="number"
-                          placeholder="L"
-                          value={skidDimensions[index]?.length || ''}
-                          onChange={(e) => handleSkidChange(index, 'length', e.target.value)}
-                        />
-                        <Form.Control
-                          type="number"
-                          placeholder="W"
-                          value={skidDimensions[index]?.width || ''}
-                          onChange={(e) => handleSkidChange(index, 'width', e.target.value)}
-                        />
-                        <Form.Control
-                          type="number"
-                          placeholder="H"
-                          value={skidDimensions[index]?.height || ''}
-                          onChange={(e) => handleSkidChange(index, 'height', e.target.value)}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-                  <Button variant="primary" onClick={handleCloseModal}>Save</Button>
-                </Modal.Footer>
-              </Modal>
-            )}
           </>
         )}
 
