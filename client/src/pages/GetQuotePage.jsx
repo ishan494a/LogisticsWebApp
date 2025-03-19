@@ -312,6 +312,7 @@ const GetQuotePage = () => {
                       value={dimensions.height}
                       onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
                     />
+                    
                   </div>
                 )}
 
@@ -342,14 +343,24 @@ const GetQuotePage = () => {
                           placeholder="Number of Skids"
                           value={skid.quantity}
                           onChange={(e) => handleSkidChange(index, 'quantity', e.target.value)}
-                        />                        
-                        {index > 0 && (
-                          <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
-                            <FaTrash />
-                          </Button>
-                        )}
+                        />
+
+                        <div style={{ width: '80px' }}>
+                          {index > 0 ? (
+                             <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                             <FaTrash />
+                           </Button>
+                          ) : (
+                            <div style={{ visibility: 'hidden' }}>
+                               <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                                <FaTrash />
+                              </Button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
+
                     <Button variant="primary" onClick={handleAddMore}>
                       Add More
                     </Button>
