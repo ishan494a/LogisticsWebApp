@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -38,16 +38,19 @@ const GetQuotePage = () => {
   const [messageStatus, setMessageStatus] = useState(null);
 
   const handleAddMore = () => {
-    alert("add more"); // Debugger
+    setSkidDimensions([...skidDimensions, { length: '', width: '', height: '', quantity: '' }]);
   }
-  const handleSkidChange = (index, dimension, value) => {
+  const handleSkidChange = (index, field, value) => {
     const updatedSkids = [...skidDimensions];
-    if (!updatedSkids[index]) {
-      updatedSkids[index] = {};
-    }
-    updatedSkids[index][dimension] = value;
+    updatedSkids[index][field] = value;
     setSkidDimensions(updatedSkids);
   };
+
+  useEffect(() => {
+    if (differentDimensions && skidDimensions.length === 0) {
+      handleAddMore();
+    }
+  }, [differentDimensions]);  
 
   const validateForm = () => {
     const newErrors = [];
@@ -306,30 +309,34 @@ const GetQuotePage = () => {
 
                 {differentDimensions && (
                   <div className="mb-3">
-                    <div className="d-flex">
-                    <Form.Control 
-                      type="number"
-                      placeholder="L"
-                      value={dimensions.length}
-                      onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
-                    />
-                    <Form.Control 
-                      type="number"
-                      placeholder="W"
-                      value={dimensions.width}
-                      onChange={(e) => setDimensions({ ...dimensions, width: e.target.value })}
-                    />
-                    <Form.Control 
-                      type="number"
-                      placeholder="H"
-                      value={dimensions.height}
-                      onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
-                    />
-                    <Form.Control
-                      type="number"
-                      placeholder='Number of Skids'
-                    />
-                  </div>
+                    {skidDimensions.map((skid, index) => (
+                      <div key={index} className="d-flex mb-2 gap-2">
+                        <Form.Control
+                          type="number"
+                          placeholder="L"
+                          value={skid.length}
+                          onChange={(e) => handleSkidChange(index, 'length', e.target.value)}
+                        />
+                        <Form.Control
+                          type="number"
+                          placeholder="W"
+                          value={skid.width}
+                          onChange={(e) => handleSkidChange(index, 'width', e.target.value)}
+                        />
+                        <Form.Control
+                          type="number"
+                          placeholder="H"
+                          value={skid.height}
+                          onChange={(e) => handleSkidChange(index, 'height', e.target.value)}
+                        />
+                        <Form.Control
+                          type="number"
+                          placeholder="Number of Skids"
+                          value={skid.quantity}
+                          onChange={(e) => handleSkidChange(index, 'quantity', e.target.value)}
+                        />
+                      </div>
+                    ))}
                     <Button variant="primary" onClick={handleAddMore}>
                       Add More
                     </Button>
