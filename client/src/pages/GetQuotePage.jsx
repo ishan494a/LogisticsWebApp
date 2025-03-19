@@ -11,6 +11,7 @@ const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
 import emailjs from 'emailjs-com';
 
 
+
 const GetQuotePage = () => {
   const [shipmentType, setShipmentType] = useState('');
   const [name, setName] = useState('');
