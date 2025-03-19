@@ -14,7 +14,7 @@ const About = () => {
       }, []);
   return (
     <div>
-      <div className={styles.ourStoryWrapper} style={{ backgroundImage: backgroundImage, backgroundColor: '#2B2B2B' }}>
+      <div className={styles.ourStoryWrapper} style={{ backgroundImage: backgroundImage }}>
         <div className={styles.ourStoryCard} >
           <h2 className={styles.ourStoryTitle}>Our Story</h2>
           <p className={styles.ourStoryText}>
