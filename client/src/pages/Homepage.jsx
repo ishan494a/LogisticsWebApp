@@ -9,7 +9,7 @@ function Homepage() {
     <div>
       <div
         className={`${styles.heroSection} text-center text-white py-5`}
-        style={{ backgroundImage: `url(/highway-night.jpg)` }}
+        style={{ backgroundImage: `url(/highway-night.png)` }}
       >
         <div className={styles.blurredCard}>
           <h1 className={styles.cardTitle}>Your Trusted Partner in Logistics</h1>

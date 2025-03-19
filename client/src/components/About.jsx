@@ -7,8 +7,8 @@ import styles from '../styles/AboutUs.module.css';
 const About = () => {
   return (
     <div>
-      <div className={styles.ourStoryWrapper}>
-        <div className={styles.ourStoryCard}>
+      <div className={styles.ourStoryWrapper} style={{ backgroundImage: `url(/highway-lights.png)` }}>
+        <div className={styles.ourStoryCard} >
           <h2 className={styles.ourStoryTitle}>Our Story</h2>
           <p className={styles.ourStoryText}>
             At GM Supply Chain Solutions Inc., logistics isn’t just a business—it’s in our blood. Our founder, Amit Mittal, comes from a family that has been operating a successful trucking business in India since 1990. Growing up around freight, Amit developed a deep understanding of supply chain dynamics and the hard work it takes to move products efficiently.

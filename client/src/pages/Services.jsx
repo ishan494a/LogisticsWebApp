@@ -89,7 +89,7 @@ const ServiceItem = ({ service, index }) => {
 const Services = () => {
   return (
     <div>
-      <div className={styles.serviceImageWrapper}>
+      <div className={styles.serviceImageWrapper} style={{ backgroundImage: `url(/interchange.png)` }}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
           <p className={styles.cardText}>
