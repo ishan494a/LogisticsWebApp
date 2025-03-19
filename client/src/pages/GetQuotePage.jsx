@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
+import { FaTrash } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -40,6 +41,12 @@ const GetQuotePage = () => {
   const handleAddMore = () => {
     setSkidDimensions([...skidDimensions, { length: '', width: '', height: '', quantity: '' }]);
   }
+
+  const handleDeleteRow = (index) => {
+    const updatedSkids = skidDimensions.filter((_, i) => i !== index);
+    setSkidDimensions(updatedSkids);
+  };
+  
   const handleSkidChange = (index, field, value) => {
     const updatedSkids = [...skidDimensions];
     updatedSkids[index][field] = value;
@@ -71,6 +78,18 @@ const GetQuotePage = () => {
     
     if (shipmentType === 'LTL' && differentDimensions && skidDimensions.some(skid => !skid.length || !skid.width || !skid.height)) {
       newErrors.push('Dimensions for each skid');
+    }
+
+    if (shipmentType === 'LTL' && differentDimensions) {
+      const totalSkidQuantity = skidDimensions.reduce((sum, dim) => {
+        const qty = parseInt(dim.quantity) || 0;
+        return sum + qty;
+      }, 0);
+      const expectedQuantity = parseInt(numberOfSkids) || 0;
+  
+      if (totalSkidQuantity !== expectedQuantity) {
+        newErrors.push('Individual Skid qunatities must add up to Total Skid Quantity');
+      }
     }
     
     setErrors(newErrors);
@@ -104,12 +123,13 @@ const GetQuotePage = () => {
 
         - Different Skid Dimensions:
           ${skidDimensions.map((dim, index) => `
-            Skid ${index + 1}:
+            Skid${index + 1} x ${dim.quantity}:
               - Length: ${dim.length} ${dimUnit}
               - Width: ${dim.width} ${dimUnit}
               - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
+      console.log(message);
       const params = {
         subject : "New Quote Request",
         message : message
@@ -304,13 +324,14 @@ const GetQuotePage = () => {
                       value={dimensions.height}
                       onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
                     />
+                    
                   </div>
                 )}
 
                 {differentDimensions && (
                   <div className="mb-3">
                     {skidDimensions.map((skid, index) => (
-                      <div key={index} className="d-flex mb-2 gap-2">
+                      <div key={index} className="d-flex mb-2 gap-2 align-items-center">
                         <Form.Control
                           type="number"
                           placeholder="L"
@@ -335,8 +356,23 @@ const GetQuotePage = () => {
                           value={skid.quantity}
                           onChange={(e) => handleSkidChange(index, 'quantity', e.target.value)}
                         />
+
+                        <div style={{ width: '80px' }}>
+                          {index > 0 ? (
+                             <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                             <FaTrash />
+                           </Button>
+                          ) : (
+                            <div style={{ visibility: 'hidden' }}>
+                               <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                                <FaTrash />
+                              </Button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
+
                     <Button variant="primary" onClick={handleAddMore}>
                       Add More
                     </Button>
