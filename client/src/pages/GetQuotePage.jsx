@@ -79,6 +79,18 @@ const GetQuotePage = () => {
     if (shipmentType === 'LTL' && differentDimensions && skidDimensions.some(skid => !skid.length || !skid.width || !skid.height)) {
       newErrors.push('Dimensions for each skid');
     }
+
+    if (shipmentType === 'LTL' && differentDimensions) {
+      const totalSkidQuantity = skidDimensions.reduce((sum, dim) => {
+        const qty = parseInt(dim.quantity) || 0;
+        return sum + qty;
+      }, 0);
+      const expectedQuantity = parseInt(numberOfSkids) || 0;
+  
+      if (totalSkidQuantity !== expectedQuantity) {
+        newErrors.push('Individual Skid qunatities must add up to Total Skid Quantity');
+      }
+    }
     
     setErrors(newErrors);
 
@@ -117,7 +129,7 @@ const GetQuotePage = () => {
               - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
-        console.log(message);
+      console.log(message);
       const params = {
         subject : "New Quote Request",
         message : message
