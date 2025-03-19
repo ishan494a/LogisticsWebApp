@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import About from '../components/About';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,11 +6,19 @@ import styles from '../styles/Homepage.module.css';
 import { FaTruck, FaShippingFast, FaClock, FaCogs } from 'react-icons/fa';
 
 function Homepage() {
+  const [backgroundImage, setBackgroundImage] = useState('');
+  useEffect(() => {
+    const image = new Image();
+    image.src = '/highway-night.png';
+    image.onload = () => {
+      setBackgroundImage(`url('/highway-night.png')`);
+    };
+  }, []);
   return (
     <div>
       <div
         className={`${styles.heroSection} text-center text-white py-5`}
-        style={{ backgroundImage: `url(/highway-night.png)` }}
+        style={{ backgroundImage : backgroundImage }}
       >
         <div className={styles.blurredCard}>
           <h1 className={styles.cardTitle}>Your Trusted Partner in Logistics</h1>

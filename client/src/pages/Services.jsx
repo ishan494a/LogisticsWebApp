@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/Services.module.css';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ const ServiceItem = ({ service, index }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (inView) {
       controls.start('visible');
     }
@@ -87,9 +87,17 @@ const ServiceItem = ({ service, index }) => {
 };
 
 const Services = () => {
+    const [backgroundImage, setBackgroundImage] = useState('');
+    useEffect(() => {
+      const image = new Image();
+      image.src = '/interchange.png';
+      image.onload = () => {
+        setBackgroundImage(`url('/interchange.png')`);
+      };
+    }, []);
   return (
     <div>
-      <div className={styles.serviceImageWrapper} style={{ backgroundImage: `url(/interchange.png)` }}>
+      <div className={styles.serviceImageWrapper} style={{ backgroundImage: backgroundImage }}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
           <p className={styles.cardText}>
