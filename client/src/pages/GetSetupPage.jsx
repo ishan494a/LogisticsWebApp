@@ -46,25 +46,6 @@ const GetSetupPage = () => {
   };
   const validateForm = () => {
     const newErrors = [];
-    if (!name) newErrors.push('Name');
-    if (!contactNumber) newErrors.push('Contact Number');
-    if (!email) newErrors.push('Email');
-    if (!yearsInBusiness) newErrors.push('Years in Business');
-    if (!mcNumber) newErrors.push('MC Number');
-    if (!lanesServiced) newErrors.push('Lanes you service');
-    if(!shipmentType.ftl || !shipmentType.ltl) newErrors.push('Type of Shipment');
-    if (!equipmentType) newErrors.push('Type of Equipment');
-    if (!bankDetails.name || !bankDetails.accountNumber || !bankDetails.transitNumber || !bankDetails.instituteNumber) {
-      newErrors.push('Bank Details');
-    }
-    if (!carrierPackage) newErrors.push('Carrier Package');
-    if (!insurance) newErrors.push('Insurance');
-    references.forEach((ref, index) => {
-      if (!ref.companyName || !ref.personName || !ref.phoneNumber) {
-        newErrors.push(`Reference ${index + 1}`);
-      }
-    });
-    
     setErrors(newErrors);
 
     if (newErrors.length > 0) {
@@ -160,11 +141,7 @@ const GetSetupPage = () => {
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
+
       />
     </Form.Group>
 
@@ -176,11 +153,6 @@ const GetSetupPage = () => {
         placeholder="Phone Number"
         value={contactNumber}
         onChange={(e) => setContactNumber(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
 
@@ -192,11 +164,6 @@ const GetSetupPage = () => {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
   </Row>
@@ -210,11 +177,6 @@ const GetSetupPage = () => {
         placeholder="Years in Business"
         value={yearsInBusiness}
         onChange={(e) => setYearsInBusiness(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
 
@@ -226,11 +188,6 @@ const GetSetupPage = () => {
         placeholder="MC #"
         value={mcNumber}
         onChange={(e) => setMcNumber(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
   </Row>
@@ -244,11 +201,6 @@ const GetSetupPage = () => {
         placeholder="Lanes You Service"
         value={lanesServiced}
         onChange={(e) => setLanesServiced(e.target.value)}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
   </Row>
@@ -258,6 +210,7 @@ const GetSetupPage = () => {
       <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
       <div className="d-flex">
         <Form.Check
+          required
           type="checkbox"
           label="LTL"
           name="ltl"
@@ -266,6 +219,7 @@ const GetSetupPage = () => {
           style={{ paddingRight: '2rem' }}
         />
         <Form.Check
+          required
           type="checkbox"
           label="FTL"
           name="ftl"
@@ -283,6 +237,7 @@ const GetSetupPage = () => {
       </Form.Label>
       <Select
   isMulti
+  required
   options={[
     { value: "Dry Van", label: "Dry Van" },
     { value: "Refrigerated", label: "Refrigerated" },
@@ -297,12 +252,6 @@ const GetSetupPage = () => {
   onChange={(selected) => setEquipmentType(selected)}
   placeholder="Select Equipment Types"
     styles={{
-      control: (base) => ({
-        ...base,
-        opacity: 0.6,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        border: '1px solid #ced4da',
-      }),
       multiValue: (base) => ({
         ...base,
         backgroundColor: 'rgba(0, 123, 255, 0.3)', // Light blue background for selected items
@@ -333,11 +282,6 @@ const GetSetupPage = () => {
         placeholder="Bank Name"
         value={bankDetails.name}
         onChange={(e) => setBankDetails({ ...bankDetails, name: e.target.value })}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
       <Form.Control
         required
@@ -345,11 +289,6 @@ const GetSetupPage = () => {
         placeholder="Account Number"
         value={bankDetails.accountNumber}
         onChange={(e) => setBankDetails({ ...bankDetails, accountNumber: e.target.value })}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
       <Form.Control
         required
@@ -357,11 +296,6 @@ const GetSetupPage = () => {
         placeholder="Transit Number"
         value={bankDetails.transitNumber}
         onChange={(e) => setBankDetails({ ...bankDetails, transitNumber: e.target.value })}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
       <Form.Control
         required
@@ -369,11 +303,6 @@ const GetSetupPage = () => {
         placeholder="Institute Number"
         value={bankDetails.instituteNumber}
         onChange={(e) => setBankDetails({ ...bankDetails, instituteNumber: e.target.value })}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
   </Row>
@@ -386,11 +315,6 @@ const GetSetupPage = () => {
         type="file"
         placeholder="Carrier Package"
         onChange={(e) => setCarrierPackage(e.target.files[0])}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
 
@@ -401,11 +325,6 @@ const GetSetupPage = () => {
         type="file"
         placeholder="Insurance"
         onChange={(e) => setInsurance(e.target.files[0])}
-        style={{
-          opacity: 0.6,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          border: '1px solid #ced4da',
-        }}
       />
     </Form.Group>
   </Row>
@@ -417,6 +336,7 @@ const GetSetupPage = () => {
         <Form.Group as={Col} controlId={`formReferenceCompanyName${index}`}>
           <Form.Label>Company Name</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Company Name"
             value={reference.companyName}
@@ -425,16 +345,12 @@ const GetSetupPage = () => {
               updatedReferences[index].companyName = e.target.value;
               setReferences(updatedReferences);
             }}
-            style={{
-              opacity: 0.6,
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid #ced4da',
-            }}
           />
         </Form.Group>
         <Form.Group as={Col} controlId={`formReferencePersonName${index}`}>
           <Form.Label>Person Name</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Person Name"
             value={reference.personName}
@@ -443,16 +359,12 @@ const GetSetupPage = () => {
               updatedReferences[index].personName = e.target.value;
               setReferences(updatedReferences);
             }}
-            style={{
-              opacity: 0.6,
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid #ced4da',
-            }}
           />
         </Form.Group>
         <Form.Group as={Col} controlId={`formReferencePhoneNumber${index}`}>
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Phone Number"
             value={reference.phoneNumber}
@@ -460,11 +372,6 @@ const GetSetupPage = () => {
               const updatedReferences = [...references];
               updatedReferences[index].phoneNumber = e.target.value;
               setReferences(updatedReferences);
-            }}
-            style={{
-              opacity: 0.6,
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid #ced4da',
             }}
           />
         </Form.Group>

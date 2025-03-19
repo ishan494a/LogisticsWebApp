@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
+import { FaTrash } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -8,6 +9,7 @@ const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
 import emailjs from 'emailjs-com';
+
 
 
 const GetQuotePage = () => {
@@ -38,36 +40,38 @@ const GetQuotePage = () => {
   const [messageStatus, setMessageStatus] = useState(null);
 
   const handleAddMore = () => {
-    alert("add more"); // Debugger
+    setSkidDimensions([...skidDimensions, { length: '', width: '', height: '', quantity: '' }]);
   }
-  const handleSkidChange = (index, dimension, value) => {
+
+  const handleDeleteRow = (index) => {
+    const updatedSkids = skidDimensions.filter((_, i) => i !== index);
+    setSkidDimensions(updatedSkids);
+  };
+  
+  const handleSkidChange = (index, field, value) => {
     const updatedSkids = [...skidDimensions];
-    if (!updatedSkids[index]) {
-      updatedSkids[index] = {};
-    }
-    updatedSkids[index][dimension] = value;
+    updatedSkids[index][field] = value;
     setSkidDimensions(updatedSkids);
   };
 
+  useEffect(() => {
+    if (differentDimensions && skidDimensions.length === 0) {
+      handleAddMore();
+    }
+  }, [differentDimensions]);  
+
   const validateForm = () => {
     const newErrors = [];
-    
-    if (!name) newErrors.push('Name');
-    if (!email) newErrors.push('Email');
-    if (!shipmentType) newErrors.push('Type of Shipment');
-    if (!pickupAddress) newErrors.push('Pickup Address');
-    if (!deliveryAddress) newErrors.push('Delivery Address');
-    if (!numberOfSkids) newErrors.push('Number of Skids');
-    if (!weight) newErrors.push('Weight');
-    if (!equipmentType) newErrors.push('Type of Equipment');
-    if (equipmentType === 'refer' && !temperatureRequired) newErrors.push('Temperature Required');
-    
-    if (shipmentType === 'LTL' && !differentDimensions && (!dimensions.length || !dimensions.width || !dimensions.height)) {
-      newErrors.push('Dimensions (L x W x H)');
-    }
-    
-    if (shipmentType === 'LTL' && differentDimensions && skidDimensions.some(skid => !skid.length || !skid.width || !skid.height)) {
-      newErrors.push('Dimensions for each skid');
+    if (shipmentType === 'LTL' && differentDimensions) {
+      const totalSkidQuantity = skidDimensions.reduce((sum, dim) => {
+        const qty = parseInt(dim.quantity) || 0;
+        return sum + qty;
+      }, 0);
+      const expectedQuantity = parseInt(numberOfSkids) || 0;
+  
+      if (totalSkidQuantity !== expectedQuantity) {
+        newErrors.push('Individual Skid qunatities must add up to Total Skid Quantity');
+      }
     }
     
     setErrors(newErrors);
@@ -101,12 +105,13 @@ const GetQuotePage = () => {
 
         - Different Skid Dimensions:
           ${skidDimensions.map((dim, index) => `
-            Skid ${index + 1}:
+            Skid${index + 1} x ${dim.quantity}:
               - Length: ${dim.length} ${dimUnit}
               - Width: ${dim.width} ${dimUnit}
               - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
+      console.log(message);
       const params = {
         subject : "New Quote Request",
         message : message
@@ -150,7 +155,7 @@ const GetQuotePage = () => {
         <Alert variant="danger">
           <ul>
             {errors.map((error, index) => (
-              <li key={index}>{error} is required.</li>
+              <li key={index}>{error}</li>
             ))}
           </ul>
         </Alert>
@@ -194,6 +199,7 @@ const GetQuotePage = () => {
             <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
             <div className="d-flex">
               <Form.Check
+                required
                 type="radio"
                 label="LTL"
                 name="shipmentType"
@@ -202,6 +208,7 @@ const GetQuotePage = () => {
                 style={{paddingRight: '2rem'}}
               />
               <Form.Check
+                required
                 type="radio"
                 label="FTL"
                 name="shipmentType"
@@ -228,6 +235,7 @@ const GetQuotePage = () => {
         <Form.Group as={Col} controlId="formDeliveryAddress">
           <Form.Label>Delivery Address <span className="text-danger">*</span></Form.Label>
           <Form.Control
+            required
             type="deliveryaddress" 
             placeholder="Delivery Address" 
             value={deliveryAddress}
@@ -284,52 +292,79 @@ const GetQuotePage = () => {
                 {!differentDimensions && (
                   <div className="d-flex">
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="L"
                       value={dimensions.length}
                       onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
                     />
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="W"
                       value={dimensions.width}
                       onChange={(e) => setDimensions({ ...dimensions, width: e.target.value })}
                     />
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="H"
                       value={dimensions.height}
                       onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
                     />
+                    
                   </div>
                 )}
 
                 {differentDimensions && (
                   <div className="mb-3">
-                    <div className="d-flex">
-                    <Form.Control 
-                      type="number"
-                      placeholder="L"
-                      value={dimensions.length}
-                      onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
-                    />
-                    <Form.Control 
-                      type="number"
-                      placeholder="W"
-                      value={dimensions.width}
-                      onChange={(e) => setDimensions({ ...dimensions, width: e.target.value })}
-                    />
-                    <Form.Control 
-                      type="number"
-                      placeholder="H"
-                      value={dimensions.height}
-                      onChange={(e) => setDimensions({ ...dimensions, height: e.target.value })}
-                    />
-                    <Form.Control
-                      type="number"
-                      placeholder='Number of Skids'
-                    />
-                  </div>
+                    {skidDimensions.map((skid, index) => (
+                      <div key={index} className="d-flex mb-2 gap-2 align-items-center">
+                        <Form.Control
+                          required
+                          type="number"
+                          placeholder="L"
+                          value={skid.length}
+                          onChange={(e) => handleSkidChange(index, 'length', e.target.value)}
+                        />
+                        <Form.Control
+                          required
+                          type="number"
+                          placeholder="W"
+                          value={skid.width}
+                          onChange={(e) => handleSkidChange(index, 'width', e.target.value)}
+                        />
+                        <Form.Control
+                          required
+                          type="number"
+                          placeholder="H"
+                          value={skid.height}
+                          onChange={(e) => handleSkidChange(index, 'height', e.target.value)}
+                        />
+                        <Form.Control
+                          required
+                          type="number"
+                          placeholder="Number of Skids"
+                          value={skid.quantity}
+                          onChange={(e) => handleSkidChange(index, 'quantity', e.target.value)}
+                        />
+
+                        <div style={{ width: '80px' }}>
+                          {index > 0 ? (
+                             <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                             <FaTrash />
+                           </Button>
+                          ) : (
+                            <div style={{ visibility: 'hidden' }}>
+                               <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                                <FaTrash />
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+
                     <Button variant="primary" onClick={handleAddMore}>
                       Add More
                     </Button>
