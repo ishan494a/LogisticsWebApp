@@ -3,13 +3,10 @@ import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
 import { FaTrash } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-const PLACES_API_KEY = import.meta.env.VITE_PLACES_API_KEY;
 const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
 import emailjs from 'emailjs-com';
-
 
 
 const GetQuotePage = () => {
@@ -70,7 +67,7 @@ const GetQuotePage = () => {
       const expectedQuantity = parseInt(numberOfSkids) || 0;
   
       if (totalSkidQuantity !== expectedQuantity) {
-        newErrors.push('Individual Skid qunatities must add up to Total Skid Quantity');
+        newErrors.push('Individual Skid quantities must add up to Total Skid Quantity');
       }
     }
     
@@ -92,8 +89,8 @@ const GetQuotePage = () => {
         - Name: ${name}
         - Email: ${email}
         - Shipment Type: ${shipmentType}
-        - Pickup Address: ${pickupAddress.label}
-        - Delivery Address: ${deliveryAddress.label}
+        - Pickup Address: ${pickupAddress}
+        - Delivery Address: ${deliveryAddress}
         - Number of Skids: ${numberOfSkids}
         - Dimensions: ${dimensions.length}x${dimensions.width}x${dimensions.height} ${dimUnit}
         - Weight: ${weight} ${weightUnit}
@@ -133,8 +130,8 @@ const GetQuotePage = () => {
       setEmail('');
       setPhone('');
       setShipmentType('');
-      setPickupAddress(null);
-      setDeliveryAddress(null);  
+      setPickupAddress('');
+      setDeliveryAddress('');  
       setNumberOfSkids('');
       setDimensions({ length: '', width: '', height: '' });
       setWeight('');
@@ -223,6 +220,7 @@ const GetQuotePage = () => {
         <Form.Group as={Col} controlId="formPickupAddress">
           <Form.Label>Pickup Address <span className="text-danger">*</span></Form.Label>
           <Form.Control
+            required
             type="pickupaddress" 
             placeholder="Pickup Address" 
             value={pickupAddress}
