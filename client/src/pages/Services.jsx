@@ -97,7 +97,7 @@ const Services = () => {
     }, []);
   return (
     <div>
-      <div className={styles.serviceImageWrapper} style={{ backgroundImage: backgroundImage }}>
+      <div className={styles.serviceImageWrapper} style={{ backgroundImage: backgroundImage, backgroundColor: '#2B2B2B' }}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
           <p className={styles.cardText}>
