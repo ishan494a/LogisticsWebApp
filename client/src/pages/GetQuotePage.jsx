@@ -61,25 +61,6 @@ const GetQuotePage = () => {
 
   const validateForm = () => {
     const newErrors = [];
-    
-    if (!name) newErrors.push('Name');
-    if (!email) newErrors.push('Email');
-    if (!shipmentType) newErrors.push('Type of Shipment');
-    if (!pickupAddress) newErrors.push('Pickup Address');
-    if (!deliveryAddress) newErrors.push('Delivery Address');
-    if (!numberOfSkids) newErrors.push('Number of Skids');
-    if (!weight) newErrors.push('Weight');
-    if (!equipmentType) newErrors.push('Type of Equipment');
-    if (equipmentType === 'refer' && !temperatureRequired) newErrors.push('Temperature Required');
-    
-    if (shipmentType === 'LTL' && !differentDimensions && (!dimensions.length || !dimensions.width || !dimensions.height)) {
-      newErrors.push('Dimensions (L x W x H)');
-    }
-    
-    if (shipmentType === 'LTL' && differentDimensions && skidDimensions.some(skid => !skid.length || !skid.width || !skid.height)) {
-      newErrors.push('Dimensions for each skid');
-    }
-
     if (shipmentType === 'LTL' && differentDimensions) {
       const totalSkidQuantity = skidDimensions.reduce((sum, dim) => {
         const qty = parseInt(dim.quantity) || 0;
@@ -173,7 +154,7 @@ const GetQuotePage = () => {
         <Alert variant="danger">
           <ul>
             {errors.map((error, index) => (
-              <li key={index}>{error} is required.</li>
+              <li key={index}>{error}</li>
             ))}
           </ul>
         </Alert>
@@ -217,6 +198,7 @@ const GetQuotePage = () => {
             <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
             <div className="d-flex">
               <Form.Check
+                required
                 type="radio"
                 label="LTL"
                 name="shipmentType"
@@ -225,6 +207,7 @@ const GetQuotePage = () => {
                 style={{paddingRight: '2rem'}}
               />
               <Form.Check
+                required
                 type="radio"
                 label="FTL"
                 name="shipmentType"
@@ -251,6 +234,7 @@ const GetQuotePage = () => {
         <Form.Group as={Col} controlId="formDeliveryAddress">
           <Form.Label>Delivery Address <span className="text-danger">*</span></Form.Label>
           <Form.Control
+            required
             type="deliveryaddress" 
             placeholder="Delivery Address" 
             value={deliveryAddress}
@@ -307,18 +291,21 @@ const GetQuotePage = () => {
                 {!differentDimensions && (
                   <div className="d-flex">
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="L"
                       value={dimensions.length}
                       onChange={(e) => setDimensions({ ...dimensions, length: e.target.value })}
                     />
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="W"
                       value={dimensions.width}
                       onChange={(e) => setDimensions({ ...dimensions, width: e.target.value })}
                     />
                     <Form.Control 
+                      required
                       type="number"
                       placeholder="H"
                       value={dimensions.height}
@@ -333,24 +320,28 @@ const GetQuotePage = () => {
                     {skidDimensions.map((skid, index) => (
                       <div key={index} className="d-flex mb-2 gap-2 align-items-center">
                         <Form.Control
+                          required
                           type="number"
                           placeholder="L"
                           value={skid.length}
                           onChange={(e) => handleSkidChange(index, 'length', e.target.value)}
                         />
                         <Form.Control
+                          required
                           type="number"
                           placeholder="W"
                           value={skid.width}
                           onChange={(e) => handleSkidChange(index, 'width', e.target.value)}
                         />
                         <Form.Control
+                          required
                           type="number"
                           placeholder="H"
                           value={skid.height}
                           onChange={(e) => handleSkidChange(index, 'height', e.target.value)}
                         />
                         <Form.Control
+                          required
                           type="number"
                           placeholder="Number of Skids"
                           value={skid.quantity}
