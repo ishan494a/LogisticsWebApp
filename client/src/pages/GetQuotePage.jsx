@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Modal, Alert } from 'react-bootstrap';
+import { FaTrash } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -40,6 +41,12 @@ const GetQuotePage = () => {
   const handleAddMore = () => {
     setSkidDimensions([...skidDimensions, { length: '', width: '', height: '', quantity: '' }]);
   }
+
+  const handleDeleteRow = (index) => {
+    const updatedSkids = skidDimensions.filter((_, i) => i !== index);
+    setSkidDimensions(updatedSkids);
+  };
+  
   const handleSkidChange = (index, field, value) => {
     const updatedSkids = [...skidDimensions];
     updatedSkids[index][field] = value;
@@ -104,12 +111,13 @@ const GetQuotePage = () => {
 
         - Different Skid Dimensions:
           ${skidDimensions.map((dim, index) => `
-            Skid ${index + 1}:
+            Skid${index + 1} x ${dim.quantity}:
               - Length: ${dim.length} ${dimUnit}
               - Width: ${dim.width} ${dimUnit}
               - Height: ${dim.height} ${dimUnit}`).join('\n')}
         
         `;
+        console.log(message);
       const params = {
         subject : "New Quote Request",
         message : message
@@ -310,7 +318,7 @@ const GetQuotePage = () => {
                 {differentDimensions && (
                   <div className="mb-3">
                     {skidDimensions.map((skid, index) => (
-                      <div key={index} className="d-flex mb-2 gap-2">
+                      <div key={index} className="d-flex mb-2 gap-2 align-items-center">
                         <Form.Control
                           type="number"
                           placeholder="L"
@@ -334,7 +342,12 @@ const GetQuotePage = () => {
                           placeholder="Number of Skids"
                           value={skid.quantity}
                           onChange={(e) => handleSkidChange(index, 'quantity', e.target.value)}
-                        />
+                        />                        
+                        {index > 0 && (
+                          <Button variant="outline-danger" size="sm" onClick={() => handleDeleteRow(index)}>
+                            <FaTrash />
+                          </Button>
+                        )}
                       </div>
                     ))}
                     <Button variant="primary" onClick={handleAddMore}>
