@@ -1,13 +1,20 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from '../styles/AboutUs.module.css';
 
 const About = () => {
+      const [backgroundImage, setBackgroundImage] = useState('');
+      useEffect(() => {
+        const image = new Image();
+        image.src = '/highway-lights.png';
+        image.onload = () => {
+          setBackgroundImage(`url('/highway-lights.png')`);
+        };
+      }, []);
   return (
     <div>
-      <div className={styles.ourStoryWrapper} style={{ backgroundImage: `url(/highway-lights.png)` }}>
+      <div className={styles.ourStoryWrapper} style={{ backgroundImage: backgroundImage }}>
         <div className={styles.ourStoryCard} >
           <h2 className={styles.ourStoryTitle}>Our Story</h2>
           <p className={styles.ourStoryText}>
