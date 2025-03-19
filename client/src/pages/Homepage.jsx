@@ -3,6 +3,7 @@ import About from '../components/About';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/Homepage.module.css';
+import { FaTruck, FaShippingFast, FaClock, FaCogs } from 'react-icons/fa';
 
 function Homepage() {
   return (
@@ -31,38 +32,22 @@ function Homepage() {
         </h5>
         <div className="row">
           <div className="col-md-3 text-center">
-            <img
-              src="/freight_broker.png"
-              alt="Freight Brokerage"
-              className={`img-fluid mb-3 ${styles.serviceIcon}`}
-            />
+            <FaTruck className={`mb-3 ${styles.serviceIcon}`} size={50} />
             <h4>Freight Brokerage</h4>
             <p>Connecting shippers with reliable carriers.</p>
           </div>
           <div className="col-md-3 text-center">
-            <img
-              src="/truckload.png"
-              alt="FTL Shipping"
-              className={`img-fluid mb-3 ${styles.serviceIcon}`}
-            />
+            <FaShippingFast className={`mb-3 ${styles.serviceIcon}`} size={50} />
             <h4>Full Truckload (FTL)</h4>
             <p>Efficient solutions for large shipments.</p>
           </div>
           <div className="col-md-3 text-center">
-            <img
-              src="/expedited.png"
-              alt="Expedited Freight"
-              className={`img-fluid mb-3 ${styles.serviceIcon}`}
-            />
+            <FaClock className={`mb-3 ${styles.serviceIcon}`} size={50} />
             <h4>Expedited Freight</h4>
             <p>Fast and reliable time-critical shipments.</p>
           </div>
           <div className="col-md-3 text-center">
-            <img
-              src="/supply_chain_consulting.png"
-              alt="Supply Chain Consulting"
-              className={`img-fluid mb-3 ${styles.serviceIcon}`}
-            />
+            <FaCogs className={`mb-3 ${styles.serviceIcon}`} size={50} />
             <h4>Supply Chain Consulting</h4>
             <p>Optimize your logistics strategy.</p>
           </div>

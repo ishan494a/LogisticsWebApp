@@ -46,10 +46,11 @@
 }
 
 .serviceIcon {
-  width: 100px;
+  width: 50px;
   height: 100px;
+  max-width: 100%;
+  height: auto;
   border-radius: 2rem;
-  border: 2px solid #b32f2f;
 }
 
 .buttonDiv a {
