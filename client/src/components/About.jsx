@@ -125,7 +125,7 @@ const About = () => {
             Logistics is about more than just moving freight—it’s about trust, relationships, and growth. If you’re looking for a logistics partner that values honesty, reliability, and mutual success, you’ve come to the right place.
           </p>
           <p className={styles.description}>
-            💡 Who’s ready to be part of the dream team? Hit "Get a Quote" and let’s start this beautiful journey together! 🚛🚢
+            💡 Who’s ready to be part of the dream team? Hit "Get a Quote" and let’s start this beautiful journey together! 🚛🚢✈️ 
           </p>
           <div className={styles.buttonDiv}>
             <Link to="/quote">
