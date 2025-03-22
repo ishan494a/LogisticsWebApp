@@ -15,7 +15,15 @@ const GetQuotePage = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [pickupAddress, setPickupAddress] = useState('');
+  const [pickupAppointment, setPickupAppointment] = useState(false);
+  const [pickupStraightTruck, setPickupStraightTruck] = useState(false);
+  const [pickupResidential, setPickupResidential] = useState(false);
+  const [pickupTailgate, setPickupTailgate] = useState(false); 
   const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryAppointment, setDeliveryAppointment] = useState(false);
+  const [deliveryStraightTruck, setDeliveryStraightTruck] = useState(false);
+  const [deliveryResidential, setDeliveryResidential] = useState(false);
+  const [deliveryTailgate, setDeliveryTailgate] = useState(false);
   const [numberOfSkids, setNumberOfSkids] = useState('');
   const [dimensions, setDimensions] = useState({
     length: '',
@@ -91,7 +99,15 @@ const GetQuotePage = () => {
         - Email: ${email}
         - Shipment Type: ${shipmentType}
         - Pickup Address: ${pickupAddress}
-        - Delivery Address: ${deliveryAddress}
+        - Pickup Appointment: ${pickupAppointment ? 'Yes' : 'No'}
+        - Pickup Straight Truck: ${pickupStraightTruck ? 'Yes' : 'No'}
+        - Pickup Residential: ${pickupResidential ? 'Yes' : 'No'}
+        - Pickup Tailgate: ${pickupTailgate ? 'Yes' : 'No'}
+        - Delivery Address: ${deliveryAddress} 
+        - Delivery Appointment: ${deliveryAppointment ? 'Yes' : 'No'}
+        - Delivery Straight Truck: ${deliveryStraightTruck ? 'Yes' : 'No'}
+        - Delivery Residential: ${deliveryResidential ? 'Yes' : 'No'}
+        - Delivery Tailgate: ${deliveryTailgate ? 'Yes' : 'No'}
         - Number of Skids: ${numberOfSkids}
         - Dimensions: ${dimensions.length}x${dimensions.width}x${dimensions.height} ${dimUnit}
         - Weight: ${weight} ${weightUnit}
@@ -230,6 +246,37 @@ const GetQuotePage = () => {
           />
         </Form.Group>
       </Row>
+      <Row className="mb-3">
+          <Form.Group as={Col} controlId="formPickupAppointment">
+            <Form.Check
+              type="checkbox"
+              label="Appointment?"
+              onChange={() => setPickupAppointment(!pickupAppointment)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formPickupStraightTruck">
+            <Form.Check
+              type="checkbox"
+              label="Straight Truck?"
+              onChange={() => setPickupStraightTruck(!pickupStraightTruck)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formPickupResidential">
+            <Form.Check
+              type="checkbox"
+              label="Residential?"
+              onChange={() => setPickupResidential(!pickupResidential)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formPickupTailgate">
+            <Form.Check
+              type="checkbox"
+              label="Tailgate?"
+              onChange={() => setPickupTailgate(!pickupTailgate)}
+            />
+          </Form.Group>
+        </Row>
+
 
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formDeliveryAddress">
@@ -243,6 +290,36 @@ const GetQuotePage = () => {
           />
         </Form.Group>
       </Row>
+      <Row className="mb-3">
+          <Form.Group as={Col} controlId="formDeliveryAppointment">
+            <Form.Check
+              type="checkbox"
+              label="Appointment?"
+              onChange={() => setDeliveryAppointment(!deliveryAppointment)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formDeliveryStraightTruck">
+            <Form.Check
+              type="checkbox"
+              label="Straight Truck?"
+              onChange={() => setDeliveryStraightTruck(!deliveryStraightTruck)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formDeliveryResidential">
+            <Form.Check
+              type="checkbox"
+              label="Residential?"
+              onChange={() => setDeliveryResidential(!deliveryResidential)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formDeliveryTailgate">
+            <Form.Check
+              type="checkbox"
+              label="Tailgate?"
+              onChange={() => setDeliveryTailgate(!deliveryTailgate)}
+            />
+          </Form.Group>
+        </Row>
 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formNumberOfSkids">
