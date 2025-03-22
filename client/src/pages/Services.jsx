@@ -98,11 +98,16 @@ const Services = () => {
   return (
     <div>
       <div className={styles.serviceImageWrapper} style={{ 
+        width: '100%',
+        height: '50vh',
+        overflow: 'hidden',
         backgroundImage: backgroundImage,
         backgroundSize: 'cover',
         backgroundPosition: 'center 80%',
         backgroundRepeat: 'no-repeat',
-        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         }}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
