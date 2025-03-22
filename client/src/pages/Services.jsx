@@ -90,14 +90,20 @@ const Services = () => {
     const [backgroundImage, setBackgroundImage] = useState('');
     useEffect(() => {
       const image = new Image();
-      image.src = '/interchange.png';
+      image.src = '/highway-truck.png';
       image.onload = () => {
-        setBackgroundImage(`url('/interchange.png')`);
+        setBackgroundImage(`url('/highway-truck.png')`);
       };
     }, []);
   return (
     <div>
-      <div className={styles.serviceImageWrapper} style={{ backgroundImage: backgroundImage }}>
+      <div className={styles.serviceImageWrapper} style={{ 
+        backgroundImage: backgroundImage,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 80%',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        }}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>Our Services</h2>
           <p className={styles.cardText}>
