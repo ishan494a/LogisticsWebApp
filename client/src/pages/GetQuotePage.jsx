@@ -29,6 +29,7 @@ const GetQuotePage = () => {
   const [weightUnit, setWeightUnit] = useState('lbs');
   const [commodity, setCommodity] = useState('');
   const [hazardous, setHazardous] = useState(false);
+  const [freezeProtection, setFreezeProtection] = useState(false);
   const [equipmentType, setEquipmentType] = useState('');
   const [temperatureRequired, setTemperatureRequired] = useState('');
   const [temperatureUnit, setTemperatureUnit] = useState('C');
@@ -96,6 +97,7 @@ const GetQuotePage = () => {
         - Weight: ${weight} ${weightUnit}
         - Commodity: ${commodity}
         - Hazardous: ${hazardous ? 'Yes' : 'No'}
+        - Freeze Protection: ${freezeProtection ? 'Yes' : 'No'}        
         - Equipment Type: ${equipmentType}
         - Temperature Required: ${temperatureRequired}
         - Special Requirements: ${specialRequirements}
@@ -425,6 +427,13 @@ const GetQuotePage = () => {
               type="checkbox"
               label="Hazardous?"
               onChange={() => setHazardous(!hazardous)}
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="formFreezeProtection">
+            <Form.Check
+              type="checkbox"
+              label="Freeze Protection?"
+              onChange={() => setFreezeProtection(!freezeProtection)}
             />
           </Form.Group>
         </Row>
