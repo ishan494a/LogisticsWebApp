@@ -210,7 +210,6 @@ const GetSetupPage = () => {
       <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
       <div className="d-flex">
         <Form.Check
-          required
           type="checkbox"
           label="LTL"
           name="ltl"
@@ -219,7 +218,6 @@ const GetSetupPage = () => {
           style={{ paddingRight: '2rem' }}
         />
         <Form.Check
-          required
           type="checkbox"
           label="FTL"
           name="ftl"
