@@ -223,7 +223,6 @@ const GetQuotePage = () => {
             <Form.Label>Type of Shipment <span className="text-danger">*</span></Form.Label>
             <div className="d-flex">
               <Form.Check
-                required
                 type="radio"
                 label="LTL"
                 name="shipmentType"
@@ -232,7 +231,6 @@ const GetQuotePage = () => {
                 style={{paddingRight: '2rem'}}
               />
               <Form.Check
-                required
                 type="radio"
                 label="FTL"
                 name="shipmentType"
