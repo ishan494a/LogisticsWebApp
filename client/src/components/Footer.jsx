@@ -9,7 +9,7 @@ const Footer = () => {
         <a href="tel:+14163884807" className="text-light mx-2">
             <FaPhoneAlt size={24} />
           </a>
-          <a href="mailto:amitmittal495@gmail.com" className="text-light mx-2">
+          <a href="mailto:amitm@gmscs.ca" className="text-light mx-2">
             <FaEnvelope size={24} />
           </a>
         </div>

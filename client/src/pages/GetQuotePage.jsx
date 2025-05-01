@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const EMAIL_API_KEY = import.meta.env.VITE_EMAIL_API_KEY;
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID_CONTACT;
 import emailjs from 'emailjs-com';
 
 

@@ -143,7 +143,7 @@ const ContactUsPage = () => {
               <Card.Body>
                 <Card.Title><FaEnvelope /> Email Us</Card.Title>
                 <Card.Text>
-                <a href="mailto:amitmittal495@gmail.com">amitmittal495@gmail.com</a>
+                <a href="mailto:amitmittal495@gmail.com">amitm@gmscs.ca</a>
                 </Card.Text>
               </Card.Body>
             </Card>
