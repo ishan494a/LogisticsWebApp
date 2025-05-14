@@ -12,6 +12,9 @@ const Footer = () => {
           <a href="mailto:amitm@gmscs.ca" className="text-light mx-2">
             <FaEnvelope size={24} />
           </a>
+          <a href="https://www.linkedin.com/in/amit-mittal-377801203/" className="text-light mx-2">
+            <FaLinkedin size={24} />
+          </a>
         </div>
       </div>
       <div className="mt-3">
